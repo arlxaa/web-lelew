@@ -11,11 +11,11 @@ npm install
 npm run dev
 ```
 
-abis itu buka http://localhost:3000. kalau mau tes versi production: `npm run build` terus `npm start`.
+abis itu buka http://localhost:3000. kl mw test versi production: `npm run build` trs `npm start`.
 
 ## notes
 
-- komponen SVG (ikon, monogram, konstelasi di hero) ditulis tangan sebagai kode, bukan gambar.
+- komponen SVG (ikon, monogram, konstelasi di hero) ditulis sbg code, bkn gambar.
 - animasi auto-off kalau sistem pengunjung lagi nyalain "reduce motion".
 
-next plan: aku bkin projects biar bs d pamerin :b
+next plan: bkin projects biar bs d pamerin :b
