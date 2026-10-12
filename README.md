@@ -1,48 +1,21 @@
-# Portofolio — Celestyn Aurelixia (Lele)
+# hai, ini web porto aku 👋
 
-Ini website portofolio pribadiku. Satu halaman, dark, nuansa ungu dengan aksen
-emas. Semua efek visual dibuat dari CSS/SVG — tidak ada file gambar hiasan,
-jadi halamannya ringan dan tidak bergantung pada aset luar.
+buatnya pakai Next.js (App Router), TypeScript, sama Tailwind.
 
-Dibuat dengan Next.js (App Router), TypeScript, dan Tailwind.
+## how to run
 
-## Menjalankan di komputer sendiri
-
-Perlu Node.js 20 ke atas. Lalu:
+perlu Node.js 20+ dulu, terus:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Buka http://localhost:3000.
+abis itu buka http://localhost:3000. kalau mau tes versi production: `npm run build` terus `npm start`.
 
-Untuk mengetes versi produksi sebelum deploy: `npm run build` lalu `npm start`.
+## notes
 
-## Mengubah isi tulisan
+- komponen SVG (ikon, monogram, konstelasi di hero) ditulis tangan sebagai kode, bukan gambar.
+- animasi auto-off kalau sistem pengunjung lagi nyalain "reduce motion".
 
-Hampir semua teks ada di satu tempat: `src/lib/content.ts` — nama, tagline,
-skill, prestasi, pengalaman, pendidikan, dan link kontak. Ganti teks di dalam
-tanda kutip, simpan, halaman langsung ikut berubah. Tulisan "personal_portfolio"
-dan angka statistik di bagian atas ada di `src/components/Hero.tsx`.
-
-Foto piagam ada di `public/certificates/`. Tiap prestasi di `content.ts` menunjuk
-ke salah satu (atau beberapa) foto lewat field `certificates`.
-
-## Isi folder
-
-```
-src/
-  app/        layout, halaman utama, dan styling global
-  components/ tiap bagian halaman (Hero, About, Skills, Achievements, dst.)
-  lib/        content.ts — semua teks terpusat di sini
-public/
-  certificates/  scan piagam yang muncul di tombol "View certificate"
-```
-
-## Catatan
-
-- Komponen SVG (ikon, monogram, konstelasi di hero) ditulis tangan sebagai kode,
-  bukan gambar.
-- Animasi dimatikan otomatis kalau sistem pengunjung menyalakan "reduce motion".
-- Rencana nanti: menambah bagian Projects kalau sudah ada karya yang mau dipajang.
+next plan: aku bikin section projects biar bisa di-pamerin :b
