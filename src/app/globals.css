@@ -1,0 +1,163 @@
+/* Hallmark · macrostructure: Bento Grid · genre: atmospheric · tokens: violet surface + gold accent */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  color: #f3eefc; /* soft off-white with a violet hint */
+  background-color: #0b0714; /* near-black violet */
+}
+
+/* Atmospheric background: near-black purple -> deep violet, warm gold hint */
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60% 50% at 15% 10%, rgba(124, 58, 237, 0.26), transparent 60%),
+    radial-gradient(55% 45% at 85% 20%, rgba(168, 130, 255, 0.18), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(60, 30, 110, 0.42), transparent 70%),
+    linear-gradient(160deg, #0b0714 0%, #120b1f 45%, #1b1230 72%, #0a0714 100%);
+}
+
+/* One quiet anchor glow, top-left. No drifting blobs (aurora-blob is an AI tell). */
+.app-bg::before {
+  content: "";
+  position: absolute;
+  width: 48vw;
+  height: 48vw;
+  top: -14vw;
+  left: -10vw;
+  border-radius: 9999px;
+  filter: blur(110px);
+  opacity: 0.35;
+  background: rgba(124, 58, 237, 0.28);
+}
+
+/* Fine grid overlay for depth */
+.app-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(199, 170, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(199, 170, 255, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 40%, black, transparent 85%);
+}
+
+.text-glow {
+  text-shadow: 0 0 12px rgba(212, 176, 106, 0.28);
+}
+
+.glass {
+  background: rgba(27, 18, 48, 0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(199, 170, 255, 0.14);
+}
+
+/* Scroll-reveal (progressively enhanced; visible by default without JS) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Hide scrollbar on the carousel track */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- Design language: gradient mesh, teardrops, bento ---------- */
+
+/* Static film-grain layer (feTurbulence) for depth — replaces the aurora mesh */
+.app-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Pure-CSS falling teardrops — golden starlight drops */
+.teardrops {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.teardrop {
+  position: absolute;
+  top: -8%;
+  width: 7px;
+  height: 11px;
+  /* teardrop shape: round bottom, pointed top */
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: linear-gradient(180deg, rgba(240, 215, 154, 0.0), rgba(240, 215, 154, 0.9));
+  box-shadow: 0 0 10px rgba(212, 176, 106, 0.6);
+  opacity: 0;
+  transform: rotate(180deg);
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0%   { transform: translateY(-10vh) rotate(180deg); opacity: 0; }
+  8%   { opacity: 0.9; }
+  92%  { opacity: 0.6; }
+  100% { transform: translateY(108vh) rotate(180deg); opacity: 0; }
+}
+
+/* Bento card: subtle glass panel with an animated gold glowing border on hover */
+.bento {
+  position: relative;
+  border-radius: 1.25rem;
+  background: rgba(27, 18, 48, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(199, 170, 255, 0.14);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+.bento::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(168, 130, 255, 0.45), transparent 40%, transparent 60%, rgba(199, 170, 255, 0.25));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.bento:hover {
+  transform: translateY(-4px);
+  background: rgba(37, 25, 64, 0.72);
+  border-color: rgba(199, 170, 255, 0.3);
+  box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.7);
+}
+.bento:hover::before { opacity: 1; }
+
+/* Monospace accent for labels, numbers, kickers */
+.mono {
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", "JetBrains Mono",
+    Menlo, Consolas, monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teardrop { animation: none; opacity: 0; }
+  .bento { transition: none; }
+}
