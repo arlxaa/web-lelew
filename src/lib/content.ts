@@ -19,7 +19,7 @@ export const profile = {
 
 export const about = {
   summary:
-    "An undergraduate Computer Science student at Bina Nusantara University with a strong interest in artificial intelligence, cybersecurity, and problem solving. A national UI design champion and long-time Taekwondo athlete (1st Dan black belt), bringing discipline, leadership, and teamwork from eight years of competition and active involvement across tech, research, and student organizations.",
+    "An undergraduate Computer Science student at Bina Nusantara University with a strong interest in artificial intelligence, cybersecurity, and problem solving. A national UI design champion and long-time Taekwondo athlete (1st Dan black belt) with 8 years of competition and active involvement across tech, research, and student organizations.",
   interests: [
     "AI",
     "Cybersecurity",
