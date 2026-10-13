@@ -1,4 +1,4 @@
-# hi, ini web porto aku 👋
+# hi, ini web porto ak :bbbbb
 
 buatnya pakai Next.js (App Router), TypeScript, sama Tailwind.
 
