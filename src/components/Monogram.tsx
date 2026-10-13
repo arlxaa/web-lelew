@@ -44,17 +44,17 @@ export default function Monogram({
     >
       <defs>
         <linearGradient id={bg} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#1b1230" />
-          <stop offset="100%" stopColor="#0b0714" />
+          <stop offset="0%" stopColor="#141417" />
+          <stop offset="100%" stopColor="#060607" />
         </linearGradient>
         <linearGradient id={gold} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F0D79A" />
-          <stop offset="100%" stopColor="#D4B06A" />
+          <stop offset="0%" stopColor="#f4f4f6" />
+          <stop offset="100%" stopColor="#d4d4d8" />
         </linearGradient>
         <linearGradient id={rim} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#D4B06A" stopOpacity="0.9" />
-          <stop offset="50%" stopColor="#b9a8e6" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#D4B06A" stopOpacity="0.6" />
+          <stop offset="0%" stopColor="#d4d4d8" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#8a8a92" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#d4d4d8" stopOpacity="0.6" />
         </linearGradient>
       </defs>
 
@@ -63,7 +63,7 @@ export default function Monogram({
       <rect x="2.75" y="2.75" width="114.5" height="114.5" rx="29.5" fill="none" stroke={`url(#${rim})`} strokeWidth="1.5" />
 
       {/* garis orbit tipis di belakang huruf */}
-      <circle cx="60" cy="60" r="44" fill="none" stroke="#b9a8e6" strokeOpacity="0.16" strokeWidth="0.8" strokeDasharray="1.5 5" />
+      <circle cx="60" cy="60" r="44" fill="none" stroke="#8a8a92" strokeOpacity="0.16" strokeWidth="0.8" strokeDasharray="1.5 5" />
 
       {/* huruf */}
       <text
@@ -81,7 +81,7 @@ export default function Monogram({
       </text>
 
       {/* bintang kecil di pojok */}
-      <path d="M96 22q0 4-4 4 4 0 4 4 0-4 4-4-4 0-4-4z" fill="#F0D79A" />
+      <path d="M96 22q0 4-4 4 4 0 4 4 0-4 4-4-4 0-4-4z" fill="#f4f4f6" />
     </svg>
   );
 }

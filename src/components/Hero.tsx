@@ -1,5 +1,6 @@
 import { profile } from "@/lib/content";
 import HeroConstellation from "./HeroConstellation";
+import LightTunnel from "./LightTunnel";
 import Reveal from "./Reveal";
 
 /**
@@ -11,7 +12,7 @@ import Reveal from "./Reveal";
 // ✏️ Edit angka/label statistik di sini
 const stats = [
   { value: profile.gpa, label: "GPA / IPK" },
-  { value: "8", label: "Years Taekwondo" },
+  { value: "8", label: "Years Competitions" },
   { value: "7+", label: "Awards" },
   { value: "6", label: "Organizations" },
 ];
@@ -21,22 +22,17 @@ const headline = { left: "CELESTYN", right: "AURELIXIA" };
 
 export default function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden text-[#f3eefc]">
-      {/* ───────── Aurora ungu (CSS murni, di belakang semua konten) ───────── */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)]"
-      >
-        <div className="hero-aurora-a absolute left-1/2 top-[22%] h-[38rem] w-[52rem] max-w-[140vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,#7c3aed_0%,#a882ff_28%,transparent_68%)] opacity-30 blur-3xl" />
-        <div className="hero-aurora-b absolute -right-24 top-[12%] h-40 w-[60rem] max-w-[160vw] -rotate-[18deg] bg-gradient-to-r from-transparent via-[#a882ff] to-transparent opacity-20 blur-3xl" />
-        {/* ✏️ opacity-30 / opacity-20 = kekuatan aurora. Naikkan kalau mau lebih terasa */}
+    <section id="top" className="relative isolate overflow-hidden text-[#ededf0]">
+      {/* ───────── Backdrop lorong cahaya (CORA-style), paling belakang ───────── */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20">
+        <LightTunnel className="h-full w-full" focusY={42} />
       </div>
 
       {/* ───────── Landing: setinggi layar ───────── */}
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-5 pt-28 pb-10 sm:px-8">
         {/* Eyebrow */}
-        <p className="mono mb-4 text-xs uppercase tracking-[0.28em] text-glow-soft sm:text-sm">
-          Hi! this is {profile.nickname} :b
+        <p className="hero-in mono mb-4 text-xs uppercase tracking-[0.28em] text-glow-soft sm:text-sm" style={{ animationDelay: "0.1s" }}>
+          Hi this is {profile.nickname} :D
         </p>
 
         {/* Headline diagonal mengapit visual */}
@@ -46,7 +42,7 @@ export default function Hero() {
           className="relative mt-6 grid items-center gap-0 lg:grid-cols-[1fr_minmax(0,24rem)_1fr]"
         >
           {/* CELESTYN — kiri atas */}
-          <span className="relative z-10 block self-start whitespace-nowrap font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] text-glow lg:-mt-4 lg:justify-self-end lg:-mr-20 lg:text-[clamp(3.5rem,6vw,6.5rem)]">
+          <span className="hero-in relative z-10 block self-start whitespace-nowrap font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] text-glow lg:-mt-4 lg:justify-self-end lg:-mr-20 lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.25s" }}>
             {headline.left}
           </span>
 
@@ -56,17 +52,17 @@ export default function Hero() {
           </div>
 
           {/* AURELIXIA — kanan bawah */}
-          <span className="relative z-10 block self-end whitespace-nowrap text-right font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] text-glow lg:mt-16 lg:justify-self-start lg:-ml-20 lg:text-left lg:text-[clamp(3.5rem,6vw,6.5rem)]">
+          <span className="hero-in relative z-10 block self-end whitespace-nowrap text-right font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] text-glow lg:mt-16 lg:justify-self-start lg:-ml-20 lg:text-left lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.4s" }}>
             {headline.right}
           </span>
         </div>
 
         {/* Deskripsi + tombol */}
-        <div className="mt-10 max-w-md lg:mt-14">
-          <p className="text-base leading-relaxed text-[#f3eefc]/80">
+        <div className="hero-in mt-10 max-w-md lg:mt-14" style={{ animationDelay: "0.55s" }}>
+          <p className="text-base leading-relaxed text-[#ededf0]/80">
             CS student at BINUS exploring{" "}
             {/* Highlight stabilo: HANYA satu frasa ini */}
-            <mark className="rounded bg-glow-violet/90 px-1.5 py-0.5 font-medium text-[#0b0714]">
+            <mark className="rounded bg-glow-soft px-1.5 py-0.5 font-medium text-[#060607]">
               AI &amp; cybersecurity
             </mark>
             . National UI design champion and a 1st-Dan black-belt Taekwondo
@@ -76,13 +72,13 @@ export default function Hero() {
           <div className="mt-7 flex flex-wrap gap-3">
             <a
               href="#about"
-              className="inline-flex items-center rounded-full bg-gradient-to-r from-glow to-glow-soft px-6 py-3 text-sm font-semibold text-[#0b0714] transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow-soft motion-safe:hover:-translate-y-0.5"
+              className="grad-fill glow-soft-hover inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-[#060607] shadow-[0_0_22px_rgba(255,255,255,0.25)] transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow-soft motion-safe:hover:-translate-y-0.5"
             >
               Explore My Journey
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-[#f3eefc] transition-colors hover:border-glow/60 hover:text-glow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow-soft"
+              className="inline-flex items-center rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-[#ededf0] transition-colors hover:border-glow/60 hover:text-glow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow-soft"
             >
               Get in Touch
             </a>
@@ -102,7 +98,7 @@ export default function Hero() {
               <dd className="font-display text-4xl font-semibold tabular-nums text-glow sm:text-5xl">
                 {s.value}
               </dd>
-              <dt className="mono mt-2 text-[0.7rem] uppercase tracking-[0.2em] text-[#f3eefc]/60">
+              <dt className="mono mt-2 text-[0.7rem] uppercase tracking-[0.2em] text-[#ededf0]/60">
                 {s.label}
               </dt>
             </Reveal>
@@ -110,20 +106,18 @@ export default function Hero() {
         </dl>
       </div>
 
-      {/* Animasi aurora: sangat pelan, mati kalau reduced-motion */}
+      {/* Animasi masuk bertahap (entrance). Mati kalau reduced-motion. */}
       <style>{`
-        .hero-aurora-a { animation: hero-drift-a 40s ease-in-out infinite alternate; }
-        .hero-aurora-b { animation: hero-drift-b 55s ease-in-out infinite alternate; }
-        @keyframes hero-drift-a {
-          from { transform: translateX(-50%) translateY(0) scale(1); }
-          to   { transform: translateX(-47%) translateY(2%) scale(1.06); }
+        .hero-in {
+          opacity: 0;
+          transform: translateY(26px);
+          animation: hero-in 0.8s cubic-bezier(.22,.7,.2,1) forwards;
         }
-        @keyframes hero-drift-b {
-          from { transform: rotate(-18deg) translateX(0); }
-          to   { transform: rotate(-16deg) translateX(-4%); }
+        @keyframes hero-in {
+          to { opacity: 1; transform: translateY(0); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .hero-aurora-a, .hero-aurora-b { animation: none; }
+          .hero-in { opacity: 1; transform: none; animation: none; }
         }
       `}</style>
     </section>

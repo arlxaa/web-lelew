@@ -6,9 +6,11 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  /** ✏️ 'fade' (default) = naik+fade; 'pop' = slide + skala (lebih terasa) */
+  variant?: "fade" | "pop";
 };
 
-export default function Reveal({ children, className = "", delay = 0 }: Props) {
+export default function Reveal({ children, className = "", delay = 0, variant = "fade" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -33,7 +35,7 @@ export default function Reveal({ children, className = "", delay = 0 }: Props) {
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`${variant === "pop" ? "reveal-pop" : "reveal"} ${visible ? "is-visible" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

@@ -8,19 +8,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Purple surfaces (near-black violet)
+        // Monochrome surfaces (near-black neutral)
         navy: {
-          950: "#0b0714",
-          900: "#120b1f",
-          800: "#1b1230",
-          700: "#271a44",
+          950: "#060607",
+          900: "#0c0c0e",
+          800: "#141417",
+          700: "#1f1f24",
         },
-        // Starlight gold accents + soft highlight
+        // Monochrome accents: white highlight + soft greys
         glow: {
-          DEFAULT: "#D4B06A", // starlight gold
-          soft: "#F0D79A",    // soft gold
-          violet: "#a882ff",  // lavender/violet accent
-          pink: "#C7D2E0",    // soft highlight
+          DEFAULT: "#e8e8ea", // bright white-grey (was gold)
+          soft: "#f4f4f6",    // near-white (was soft gold)
+          violet: "#c7c7cc",  // mid grey (was violet accent)
+          pink: "#9a9aa2",    // muted grey (was soft highlight)
         },
       },
       fontFamily: {
@@ -28,9 +28,9 @@ const config: Config = {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        glow: "0 0 22px rgba(212,176,106,0.35), 0 0 44px rgba(240,215,154,0.18)",
-        "glow-lg": "0 0 36px rgba(212,176,106,0.45), 0 0 72px rgba(232,197,132,0.25)",
-        "glow-violet": "0 0 24px rgba(139,92,246,0.45), 0 0 48px rgba(124,58,237,0.25)",
+        glow: "0 0 22px rgba(232,232,234,0.22), 0 0 44px rgba(244,244,246,0.12)",
+        "glow-lg": "0 0 36px rgba(232,232,234,0.3), 0 0 72px rgba(244,244,246,0.16)",
+        "glow-violet": "0 0 24px rgba(199,199,204,0.28), 0 0 48px rgba(154,154,162,0.16)",
       },
       keyframes: {
         float: {

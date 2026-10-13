@@ -205,5 +205,4 @@ export const navItems = [
   { label: "Achievements", href: "#achievements" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
 ];

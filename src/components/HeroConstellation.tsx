@@ -13,9 +13,9 @@ import { useId } from "react";
  * Props sama seperti versi sebelumnya: <HeroConstellation className="..." />
  */
 
-const GOLD = "#D4B06A";
-const SOFT_GOLD = "#F0D79A";
-const LAVENDER = "#b9a8e6";
+const GOLD = "#d4d4d8";      // mid-grey (was gold)
+const SOFT_GOLD = "#f4f4f6"; // near-white (was soft gold)
+const LAVENDER = "#8a8a92";  // muted grey (was lavender)
 
 // ✏️ Bintang: x,y dalam viewBox 600x600. `label` = teks skill, `pos` = di atas/bawah bintang.
 // Bintang yang tidak berlabel sengaja dilewati (sisi kiri/kanan tertimpa nama CELESTYN/AURELIXIA).
@@ -35,7 +35,7 @@ const stars: {
   { x: 462, y: 176, r: 4.2, spark: true, d: 3.1, label: "WEB DEV", pos: "top" },
   { x: 502, y: 318, r: 3, d: 1.8 },
   { x: 436, y: 440, r: 3.6, d: 2.9, label: "STARTUP", pos: "bottom" },
-  { x: 318, y: 504, r: 4.4, spark: true, d: 0.9, label: "POOMSAE", pos: "bottom" },
+  { x: 318, y: 504, r: 4.4, spark: true, d: 0.9, label: "TEACHING", pos: "bottom" },
   { x: 188, y: 450, r: 3.2, d: 2.1, label: "ENTREPRENEURSHIP", pos: "bottom" },
   { x: 100, y: 332, r: 3.8, d: 3.6 },
 ];
@@ -57,7 +57,7 @@ function mulberry32(seed: number) {
   };
 }
 
-const DUST_COUNT = 80; // ✏️ jumlah debu bintang
+const DUST_COUNT = 40; // ✏️ jumlah debu bintang
 const dust = (() => {
   const rnd = mulberry32(2025);
   const out: { x: number; y: number; r: number; o: number; gold: boolean; tw: boolean; dur: number; del: number }[] = [];
@@ -111,9 +111,9 @@ export default function HeroConstellation({ className = "" }: { className?: stri
       <svg viewBox="0 0 600 600" className="hc-svg" role="presentation" focusable="false">
         <defs>
           <radialGradient id={glow} cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor={GOLD} stopOpacity="0.28" />
-            <stop offset="55%" stopColor="#6d4fc2" stopOpacity="0.10" />
-            <stop offset="100%" stopColor="#0b0714" stopOpacity="0" />
+            <stop offset="0%" stopColor={GOLD} stopOpacity="0.26" />
+            <stop offset="55%" stopColor="#5a5a62" stopOpacity="0.10" />
+            <stop offset="100%" stopColor="#060607" stopOpacity="0" />
           </radialGradient>
           <linearGradient id={line} x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor={SOFT_GOLD} stopOpacity="0.75" />
@@ -199,7 +199,7 @@ export default function HeroConstellation({ className = "" }: { className?: stri
               ) : (
                 <circle cx={s.x} cy={s.y} r={s.r} fill={GOLD} />
               )}
-              <circle cx={s.x} cy={s.y} r={s.r * 0.45} fill="#fff7e0" />
+              <circle cx={s.x} cy={s.y} r={s.r * 0.45} fill="#ffffff" />
             </g>
           ))}
 
@@ -236,11 +236,11 @@ export default function HeroConstellation({ className = "" }: { className?: stri
         .hc-radar {
           position: absolute; inset: 0;
           background: conic-gradient(from 0deg,
-            rgba(212,176,106,0) 0deg,
-            rgba(212,176,106,0) 285deg,
-            rgba(212,176,106,.10) 335deg,
-            rgba(240,215,154,.34) 359deg,
-            rgba(240,215,154,.55) 360deg);
+            rgba(255,255,255,0) 0deg,
+            rgba(255,255,255,0) 285deg,
+            rgba(255,255,255,.08) 335deg,
+            rgba(255,255,255,.26) 359deg,
+            rgba(255,255,255,.42) 360deg);
           -webkit-mask-image: radial-gradient(circle closest-side, transparent 4%, #000 14%);
                   mask-image: radial-gradient(circle closest-side, transparent 4%, #000 14%);
           animation: hc-rot 10s linear infinite;  /* ✏️ kecepatan sapuan */

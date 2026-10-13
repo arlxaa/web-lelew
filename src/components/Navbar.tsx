@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass shadow-glow-violet" : "bg-transparent"
+        scrolled ? "glass border-b border-white/10" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -45,9 +45,9 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="hidden rounded-full border border-[#8b5cf6]/50 bg-[#8b5cf6]/15 px-5 py-2 text-sm font-semibold text-white shadow-glow-violet transition-all hover:bg-[#8b5cf6]/25 md:inline-block"
+          className="hidden rounded-full border border-white/25 px-5 py-2 text-sm font-semibold text-white transition-all hover:border-white/50 hover:bg-white/10 md:inline-block"
         >
-          Contact
+          Let&apos;s talk
         </a>
 
         <button

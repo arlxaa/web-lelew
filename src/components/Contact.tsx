@@ -60,7 +60,7 @@ export default function Contact() {
               href={l.href}
               target={l.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="bento group flex items-center gap-4 p-5"
+              className="bento glow-soft-hover group flex items-center gap-4 p-5"
             >
               <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-glow/30 bg-glow/10 text-glow-soft">
                 <Icon name={l.icon} size={22} title={l.label} />

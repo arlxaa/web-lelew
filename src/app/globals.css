@@ -9,20 +9,20 @@ html {
 }
 
 body {
-  color: #f3eefc; /* soft off-white with a violet hint */
-  background-color: #0b0714; /* near-black violet */
+  color: #ededf0; /* soft off-white */
+  background-color: #060607; /* near-black neutral */
 }
 
-/* Atmospheric background: near-black purple -> deep violet, warm gold hint */
+/* Atmospheric background: near-black -> deep charcoal, cool grey hint */
 .app-bg {
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60% 50% at 15% 10%, rgba(124, 58, 237, 0.26), transparent 60%),
-    radial-gradient(55% 45% at 85% 20%, rgba(168, 130, 255, 0.18), transparent 60%),
-    radial-gradient(70% 60% at 50% 100%, rgba(60, 30, 110, 0.42), transparent 70%),
-    linear-gradient(160deg, #0b0714 0%, #120b1f 45%, #1b1230 72%, #0a0714 100%);
+    radial-gradient(60% 50% at 15% 10%, rgba(255, 255, 255, 0.06), transparent 60%),
+    radial-gradient(55% 45% at 85% 20%, rgba(200, 200, 210, 0.05), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(30, 30, 34, 0.5), transparent 70%),
+    linear-gradient(160deg, #060607 0%, #0c0c0e 45%, #141417 72%, #060607 100%);
 }
 
 /* One quiet anchor glow, top-left. No drifting blobs (aurora-blob is an AI tell). */
@@ -35,8 +35,8 @@ body {
   left: -10vw;
   border-radius: 9999px;
   filter: blur(110px);
-  opacity: 0.35;
-  background: rgba(124, 58, 237, 0.28);
+  opacity: 0.22;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Fine grid overlay for depth */
@@ -45,20 +45,20 @@ body {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(199, 170, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(199, 170, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(circle at 50% 40%, black, transparent 85%);
 }
 
 .text-glow {
-  text-shadow: 0 0 12px rgba(212, 176, 106, 0.28);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
 }
 
 .glass {
-  background: rgba(27, 18, 48, 0.55);
+  background: rgba(20, 20, 23, 0.55);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(199, 170, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Scroll-reveal (progressively enhanced; visible by default without JS) */
@@ -107,8 +107,8 @@ body {
   height: 11px;
   /* teardrop shape: round bottom, pointed top */
   border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
-  background: linear-gradient(180deg, rgba(240, 215, 154, 0.0), rgba(240, 215, 154, 0.9));
-  box-shadow: 0 0 10px rgba(212, 176, 106, 0.6);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.85));
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   opacity: 0;
   transform: rotate(180deg);
   animation: fall linear infinite;
@@ -124,9 +124,9 @@ body {
 .bento {
   position: relative;
   border-radius: 1.25rem;
-  background: rgba(27, 18, 48, 0.6);
+  background: rgba(20, 20, 23, 0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(199, 170, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
@@ -136,7 +136,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(168, 130, 255, 0.45), transparent 40%, transparent 60%, rgba(199, 170, 255, 0.25));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 40%, transparent 60%, rgba(255, 255, 255, 0.18));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -145,8 +145,8 @@ body {
 }
 .bento:hover {
   transform: translateY(-4px);
-  background: rgba(37, 25, 64, 0.72);
-  border-color: rgba(199, 170, 255, 0.3);
+  background: rgba(31, 31, 36, 0.72);
+  border-color: rgba(255, 255, 255, 0.24);
   box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.7);
 }
 .bento:hover::before { opacity: 1; }
@@ -160,4 +160,87 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .teardrop { animation: none; opacity: 0; }
   .bento { transition: none; }
+}
+
+/* ---------- Gradient monokrom + glow (putih → abu) ---------- */
+/* ✏️ Monokrom: hanya putih/abu, tanpa warna. */
+
+/* Teks dengan gradient berjalan pelan */
+.text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #cfcfd4 30%,
+    #9a9aa2 55%,
+    #f4f4f6 80%,
+    #ffffff 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  animation: grad-shift 9s ease-in-out infinite;
+}
+
+/* Border/isi gradient untuk tombol & kartu */
+.grad-fill {
+  background-image: linear-gradient(120deg, #f4f4f6 0%, #d4d4d8 42%, #a1a1aa 72%, #e8e8ea 100%);
+  background-size: 180% 180%;
+  animation: grad-shift 10s ease-in-out infinite;
+}
+
+/* Glow lembut monokrom — tanpa glass tebal */
+.glow-soft {
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.22),
+    0 0 44px rgba(230, 230, 235, 0.14),
+    0 0 72px rgba(200, 200, 206, 0.1);
+}
+.glow-soft-hover {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.glow-soft-hover:hover {
+  box-shadow:
+    0 0 26px rgba(255, 255, 255, 0.3),
+    0 0 56px rgba(230, 230, 235, 0.2),
+    0 0 90px rgba(200, 200, 206, 0.14);
+}
+
+/* Cincin/ring gradient yang berpendar (elemen 'lingkaran' dari referensi) */
+.glow-ring {
+  position: relative;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    #ffffff, #cfcfd4, #8a8a92, #f4f4f6, #ffffff
+  );
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.4))
+          drop-shadow(0 0 34px rgba(200, 200, 206, 0.22));
+  animation: grad-rotate 14s linear infinite;
+}
+
+@keyframes grad-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes grad-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient, .grad-fill, .glow-ring { animation: none; }
+}
+
+/* Reveal lebih kaya untuk kartu: slide + skala (dipakai di FeatureCards) */
+.reveal-pop {
+  opacity: 0;
+  transform: translateY(34px) scale(0.96);
+  transition: opacity 0.7s cubic-bezier(.22,.7,.2,1), transform 0.7s cubic-bezier(.22,.7,.2,1);
+}
+.reveal-pop.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pop { opacity: 1; transform: none; transition: none; }
 }
