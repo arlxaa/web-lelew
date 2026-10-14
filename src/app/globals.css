@@ -3,26 +3,92 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------- Theme tokens (dark default, light override) ---------- */
+:root {
+  --bg: #060607;        /* near-black */
+  --bg-2: #0c0c0e;
+  --fg: #ededf0;        /* soft off-white */
+  --fg-dim: rgba(237, 237, 240, 0.62);
+  --line: rgba(255, 255, 255, 0.1);   /* hairlines / grid */
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --card: rgba(20, 20, 23, 0.6);
+  --card-hover: rgba(31, 31, 36, 0.72);
+  --glow-ink: 255, 255, 255;          /* rgb used in glows */
+  --anchor: rgba(255, 255, 255, 0.08);
+  --grid-ink: rgba(255, 255, 255, 0.04);
+
+  /* 10% accent (60/30/10). Default periwinkle; switch via html[data-accent]. */
+  --accent: #7c6cff;        /* periwinkle (from reference) */
+  --accent-rgb: 124, 108, 255;
+}
+
+/* Accent palettes — flip one attribute to recolor the 10% */
+html[data-accent="lilac"]  { --accent: #a78bff; --accent-rgb: 167, 139, 255; }
+html[data-accent="sky"]    { --accent: #6aa8ff; --accent-rgb: 106, 168, 255; }
+html[data-accent="periwinkle"] { --accent: #7c6cff; --accent-rgb: 124, 108, 255; }
+
+html.light {
+  --bg: #e9ebfb;        /* soft periwinkle-white */
+  --bg-2: #dcdef7;      /* lavender tint */
+  --fg: #2a2440;        /* deep violet-ink */
+  --fg-dim: rgba(42, 36, 64, 0.62);
+  --line: rgba(90, 78, 160, 0.16);
+  --line-strong: rgba(90, 78, 160, 0.3);
+  --card: rgba(255, 255, 255, 0.6);
+  --card-hover: rgba(255, 255, 255, 0.85);
+  --glow-ink: 124, 108, 255;   /* periwinkle glow in light mode */
+  --anchor: rgba(124, 108, 255, 0.16);
+  --grid-ink: rgba(90, 78, 160, 0.06);
+}
+
+/* Smooth, animated theme switch: longer multi-prop transition (fallback path) */
+html.theme-anim,
+html.theme-anim body,
+html.theme-anim .bento,
+html.theme-anim .app-bg,
+html.theme-anim .app-grid,
+html.theme-anim .glass {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease !important;
+}
+
+/* View Transitions: circular reveal of the NEW theme from the toggle.
+   Disable the default cross-fade so the clip-path circle is the only motion. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
 body {
-  color: #ededf0; /* soft off-white */
-  background-color: #060607; /* near-black neutral */
+  color: var(--fg);
+  background-color: var(--bg);
 }
 
-/* Atmospheric background: near-black -> deep charcoal, cool grey hint */
+/* Atmospheric background: driven by theme tokens */
 .app-bg {
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60% 50% at 15% 10%, rgba(255, 255, 255, 0.06), transparent 60%),
-    radial-gradient(55% 45% at 85% 20%, rgba(200, 200, 210, 0.05), transparent 60%),
-    radial-gradient(70% 60% at 50% 100%, rgba(30, 30, 34, 0.5), transparent 70%),
-    linear-gradient(160deg, #060607 0%, #0c0c0e 45%, #141417 72%, #060607 100%);
+    radial-gradient(60% 50% at 15% 10%, rgba(var(--glow-ink), 0.06), transparent 60%),
+    radial-gradient(55% 45% at 85% 20%, rgba(var(--glow-ink), 0.05), transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(var(--glow-ink), 0.04), transparent 70%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 45%, var(--bg) 100%);
+}
+/* Light mode: richer lavender/periwinkle glow blobs (like the reference) */
+html.light .app-bg {
+  background:
+    radial-gradient(55% 48% at 12% 8%, rgba(124, 108, 255, 0.16), transparent 60%),
+    radial-gradient(50% 44% at 88% 16%, rgba(167, 139, 255, 0.14), transparent 60%),
+    radial-gradient(60% 55% at 70% 100%, rgba(106, 168, 255, 0.12), transparent 70%),
+    linear-gradient(160deg, #eceefb 0%, #dcdef7 48%, #e6e4fb 100%);
 }
 
 /* One quiet anchor glow, top-left. No drifting blobs (aurora-blob is an AI tell). */
@@ -36,7 +102,7 @@ body {
   border-radius: 9999px;
   filter: blur(110px);
   opacity: 0.22;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--anchor);
 }
 
 /* Fine grid overlay for depth */
@@ -45,20 +111,20 @@ body {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(var(--grid-ink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-ink) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(circle at 50% 40%, black, transparent 85%);
 }
 
 .text-glow {
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
+  text-shadow: 0 0 12px rgba(var(--glow-ink), 0.18);
 }
 
 .glass {
-  background: rgba(20, 20, 23, 0.55);
+  background: var(--card);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
 }
 
 /* Scroll-reveal (progressively enhanced; visible by default without JS) */
@@ -124,10 +190,10 @@ body {
 .bento {
   position: relative;
   border-radius: 1.25rem;
-  background: rgba(20, 20, 23, 0.6);
+  background: var(--card);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   overflow: hidden;
 }
 .bento::before {
@@ -136,7 +202,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 40%, transparent 60%, rgba(255, 255, 255, 0.18));
+  background: linear-gradient(135deg, rgba(var(--glow-ink), 0.35), transparent 40%, transparent 60%, rgba(var(--glow-ink), 0.18));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -144,9 +210,8 @@ body {
   transition: opacity 0.3s ease;
 }
 .bento:hover {
-  transform: translateY(-4px);
-  background: rgba(31, 31, 36, 0.72);
-  border-color: rgba(255, 255, 255, 0.24);
+  background: var(--card-hover);
+  border-color: var(--line-strong);
   box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.7);
 }
 .bento:hover::before { opacity: 1; }
@@ -244,3 +309,331 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .reveal-pop { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- Extra reveal variants (richer entrance motion) ---------- */
+.reveal-left,
+.reveal-right,
+.reveal-zoom,
+.reveal-blur {
+  opacity: 0;
+  transition:
+    opacity 0.8s cubic-bezier(.16,1,.3,1),
+    transform 0.9s cubic-bezier(.16,1,.3,1),
+    filter 0.8s ease;
+}
+.reveal-left  { transform: translateX(-60px); }
+.reveal-right { transform: translateX(60px); }
+.reveal-zoom  { transform: scale(0.82); }
+.reveal-blur  { transform: translateY(28px); filter: blur(10px); }
+
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-zoom.is-visible,
+.reveal-blur.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-left, .reveal-right, .reveal-zoom, .reveal-blur {
+    opacity: 1; transform: none; filter: none; transition: none;
+  }
+}
+
+/* ---------- Hover gestures: varied per element type ---------- */
+
+/* Card tilt+lift — distinct from a plain upward slide. Overrides .bento:hover transform. */
+.fx-tilt {
+  transition: transform 0.35s cubic-bezier(.22,.7,.2,1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.fx-tilt:hover,
+.fx-tilt.bento:hover {
+  transform: translateY(-8px) rotate(-1.4deg) scale(1.03);
+  box-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 255, 255, 0.12);
+}
+
+/* Card slide — nudges right + scales, distinct from tilt/lift */
+.fx-slide {
+  transition: transform 0.35s cubic-bezier(.22,.7,.2,1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.fx-slide:hover,
+.fx-slide.bento:hover {
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.75), 0 0 24px rgba(255, 255, 255, 0.1);
+}
+
+/* Nav link: underline grows from the left on hover */
+.fx-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1.5px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(.22,.7,.2,1);
+}
+.fx-underline:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-tilt:hover, .fx-tilt.bento:hover { transform: none; }
+  .fx-slide:hover, .fx-slide.bento:hover { transform: none; }
+  .fx-underline::after { transition: none; }
+}
+
+/* ---------- Shimmer: name "kelap-kelip" sweep ---------- */
+.text-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    var(--fg) 0%,
+    var(--fg) 38%,
+    rgba(var(--glow-ink), 0.55) 48%,
+    #ffffff 52%,
+    var(--fg) 62%,
+    var(--fg) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(var(--glow-ink), 0.14);
+  animation: shimmer 5.5s ease-in-out infinite;
+}
+html.light .text-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    var(--fg) 0%, var(--fg) 38%,
+    rgba(0,0,0,0.35) 48%, #000000 52%, var(--fg) 62%, var(--fg) 100%
+  );
+}
+@keyframes shimmer {
+  0%   { background-position: 180% 0; }
+  60%  { background-position: -80% 0; }
+  100% { background-position: -80% 0; }
+}
+
+/* Twinkle dot — small blinking accents */
+.twinkle { animation: twinkle 2.4s ease-in-out infinite; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50%      { opacity: 1; transform: scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer { animation: none; }
+  .twinkle { animation: none; opacity: 0.7; }
+}
+
+/* ---------- Intro loading screen (constellation, scroll-to-enter) ---------- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  transition: transform 0.95s cubic-bezier(.76,0,.24,1), opacity 0.6s ease 0.4s;
+}
+/* Whole intro lifts up as the hero rises from below */
+.intro-leaving {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+/* Backdrop opens (fades) first, revealing the hero behind */
+.intro-leaving .intro-bg {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+/* Constellation + hint dissolve quickly so only the names carry over */
+.intro-dissolve {
+  transition: opacity 0.4s ease, transform 0.5s ease;
+}
+.intro-leaving .intro-dissolve {
+  opacity: 0;
+  transform: scale(0.92);
+}
+/* Names ride the upward slide and settle (no sideways fling).
+   The hero's own names appear behind as the intro clears — a clean hand-off. */
+.intro-name {
+  transition: transform 0.95s cubic-bezier(.76,0,.24,1), opacity 0.5s ease 0.45s;
+}
+.intro-leaving .intro-name-top,
+.intro-leaving .intro-name-bottom {
+  opacity: 0;
+}
+.intro-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 50% at 50% 42%, rgba(var(--glow-ink), 0.06), transparent 65%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 55%, var(--bg) 100%);
+}
+.intro-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(90vw, 560px);
+  animation: intro-rise 1s cubic-bezier(.16,1,.3,1) both;
+}
+.intro-constellation {
+  width: 100%;
+  margin: -1.5rem 0;
+}
+.intro-name {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 0.9;
+  font-size: clamp(1.75rem, 7.5vw, 3.4rem);
+  pointer-events: none;
+}
+.intro-name-top { align-self: flex-start; margin-left: 2%; }
+.intro-name-bottom { align-self: flex-end; margin-right: 2%; }
+
+.intro-hint {
+  margin-top: clamp(1.25rem, 4vh, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--fg);
+  opacity: 0.72;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  animation: intro-fade-in 1.4s ease 0.6s both;
+}
+.intro-hint:hover { opacity: 1; }
+.intro-hint-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+.intro-arrow { animation: intro-bob 1.8s ease-in-out infinite; }
+
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes intro-fade-in { from { opacity: 0; } to { opacity: 0.72; } }
+@keyframes intro-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(7px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-inner { animation: none; }
+  .intro-arrow { animation: none; }
+  .intro-hint { animation: none; }
+  .intro-name { transition: opacity 0.4s ease; }
+}
+
+/* ---------- Whitespace rhythm: let sections breathe ---------- */
+.section-pad { padding-top: clamp(6rem, 12vw, 10rem); padding-bottom: clamp(6rem, 12vw, 10rem); }
+
+/* ---------- 10% accent utilities ---------- */
+.accent-text { color: var(--accent); }
+.accent-bg { background-color: var(--accent); }
+.accent-border { border-color: var(--accent) !important; }
+.accent-dot { background-color: var(--accent) !important; }
+.accent-fill {
+  background-image: linear-gradient(120deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #ffffff));
+}
+.accent-glow {
+  box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.5), 0 0 48px rgba(var(--accent-rgb), 0.28);
+}
+.accent-ring:focus-visible { outline-color: var(--accent) !important; }
+/* nav underline + hero CTA ride the accent */
+.fx-underline::after { background: var(--accent); }
+
+/* ---------- Light-mode remap for literal Tailwind colors ----------
+   The site was authored dark-first with hard-coded white/slate text and
+   navy surfaces. Rather than edit every component, remap those literal
+   utilities to theme-aware ink/surface values when html.light is set. */
+html.light .text-white { color: #211d33 !important; }
+html.light .text-slate-200 { color: #2d2742 !important; }
+html.light .text-slate-300 { color: #3d3556 !important; }
+html.light .text-slate-400 { color: #5f567e !important; }
+
+/* navy surfaces -> light lavender panels */
+html.light .bg-navy-950 { background-color: #eef0fb !important; }
+html.light .bg-navy-900 { background-color: #e4e6f7 !important; }
+html.light .bg-navy-800\/60 { background-color: rgba(255,255,255,0.68) !important; }
+html.light .bg-navy-800\/70 { background-color: rgba(255,255,255,0.8) !important; }
+html.light .border-navy-700 { border-color: rgba(70,60,130,0.14) !important; }
+
+/* white hairlines/fills -> violet-ink equivalents */
+html.light .border-white\/10 { border-color: rgba(70,60,130,0.12) !important; }
+html.light .border-white\/15 { border-color: rgba(70,60,130,0.16) !important; }
+html.light .border-white\/20 { border-color: rgba(70,60,130,0.2) !important; }
+html.light .border-white\/25 { border-color: rgba(70,60,130,0.24) !important; }
+html.light .bg-white\/5 { background-color: rgba(124,108,255,0.05) !important; }
+html.light .bg-white\/10 { background-color: rgba(124,108,255,0.08) !important; }
+
+/* glow accents (near-white) -> readable violet-ink in light mode */
+html.light .text-glow,
+html.light .text-glow-soft { color: #2b2545 !important; text-shadow: none; }
+html.light .text-glow-pink { color: #5f567e !important; }
+html.light .text-glow-violet { color: #3d3556 !important; }
+
+/* The stabilo highlight -> periwinkle bg + white text in light mode */
+html.light mark.bg-glow-soft { background-color: #7c6cff !important; color: #ffffff !important; }
+
+/* ---------- Light mode: constellation goes dark (ink on lavender) ---------- */
+html.light .hc-svg circle,
+html.light .hc-svg path,
+html.light .hc-svg line { }
+/* stars / sparks / dust: force dark fills */
+html.light .hc-svg [fill="#d4d4d8"],
+html.light .hc-svg [fill="#f4f4f6"],
+html.light .hc-svg [fill="#8a8a92"],
+html.light .hc-svg [fill="#ffffff"],
+html.light .hc-svg [fill="#fff"] { fill: #2a2440 !important; }
+/* constellation lines + rings + ticks: dark strokes */
+html.light .hc-svg [stroke="#d4d4d8"],
+html.light .hc-svg [stroke="#f4f4f6"],
+html.light .hc-svg [stroke="#8a8a92"] { stroke: #2a2440 !important; }
+html.light .hc-ring { stroke: rgba(42, 36, 64, 0.3) !important; }
+html.light .hc-deg { fill: rgba(42, 36, 64, 0.55) !important; }
+html.light .hc-label { fill: #2a2440 !important; }
+/* radar sweep: dark translucent instead of white */
+html.light .hc-radar {
+  background: conic-gradient(from 0deg,
+    rgba(42,36,64,0) 0deg,
+    rgba(42,36,64,0) 285deg,
+    rgba(42,36,64,.08) 335deg,
+    rgba(42,36,64,.2) 359deg,
+    rgba(42,36,64,.32) 360deg) !important;
+}
+/* Central soft glow: swap to dark halo on light bg */
+html.light .hc-svg > g > circle:first-child { opacity: 0.35; }
+
+/* Light mode: the dark perspective tunnel clashes on lavender — hide it entirely.
+   Hide ALL decorative children (svg hills + glow divs), not just > div. */
+html.light .light-tunnel { background: transparent !important; }
+html.light .light-tunnel > div[aria-hidden],
+html.light .light-tunnel > svg,
+html.light .light-tunnel > [aria-hidden] { opacity: 0 !important; }
+
+/* Shimmer names: in light mode use a dark periwinkle→ink gradient (readable) */
+html.light .text-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    #2a2440 0%, #2a2440 36%,
+    #7c6cff 48%, #a78bff 52%,
+    #2a2440 64%, #2a2440 100%
+  ) !important;
+  text-shadow: none;
+}
+
+/* Hero body text / dimmed off-whites -> readable ink in light mode */
+html.light .text-\[\#ededf0\],
+html.light .text-\[\#ededf0\]\/80,
+html.light .text-\[\#ededf0\]\/60 { color: #2a2440 !important; }

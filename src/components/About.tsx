@@ -4,11 +4,11 @@ import Reveal from "./Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="about" className="section-pad mx-auto max-w-5xl px-6">
       <SectionHeading kicker="Who I Am" title="About Me" />
 
       <div className="grid gap-5 md:grid-cols-5">
-        <Reveal className="md:col-span-3">
+        <Reveal className="md:col-span-3" variant="left">
           <div className="bento h-full p-8">
             <p className="text-base leading-relaxed text-slate-300">
               {about.summary}
@@ -26,7 +26,7 @@ export default function About() {
           </div>
         </Reveal>
 
-        <Reveal className="md:col-span-2" delay={120}>
+        <Reveal className="md:col-span-2" delay={120} variant="right">
           <div className="bento flex h-full flex-col items-center justify-center p-8 text-center">
             <p className="mono text-[11px] uppercase tracking-widest text-slate-400">
               grade point average

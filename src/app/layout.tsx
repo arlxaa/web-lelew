@@ -3,6 +3,7 @@ import { Poppins, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/lib/content";
 import Teardrops from "@/components/Teardrops";
+import Loader from "@/components/Loader";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,8 +35,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`${poppins.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${spaceGrotesk.variable}`}>
+      <head>
+        {/* Apply saved theme before paint to avoid a flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.add('light');}var a=localStorage.getItem('accent');if(a){document.documentElement.setAttribute('data-accent',a);}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
+        <Loader />
         <div className="app-bg" aria-hidden />
         <div className="app-mesh" aria-hidden />
         <div className="app-grid" aria-hidden />

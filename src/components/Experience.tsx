@@ -4,7 +4,7 @@ import Reveal from "./Reveal";
 
 export default function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-4xl px-6 py-24">
+    <section id="experience" className="section-pad mx-auto max-w-4xl px-6">
       <SectionHeading kicker="My Journey" title="Experience" />
 
       <div className="relative pl-8 sm:pl-10">
@@ -13,7 +13,7 @@ export default function Experience() {
 
         <div className="space-y-8">
           {experiences.map((exp, i) => (
-            <Reveal key={`${exp.org}-${exp.role}`} delay={i * 80}>
+            <Reveal key={`${exp.org}-${exp.role}`} delay={i * 80} variant="left">
               <div className="relative">
                 {/* Node */}
                 <span
@@ -55,7 +55,7 @@ export default function Experience() {
             {organizations.map((o) => (
               <span
                 key={o}
-                className="rounded-full border border-white/10 bg-navy-800/60 px-4 py-2 text-sm text-slate-200 transition-all hover:border-glow/50 hover:text-white hover:shadow-glow"
+                className="rounded-full border border-white/10 bg-navy-800/60 px-4 py-2 text-sm text-slate-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-glow/50 hover:text-white motion-reduce:hover:translate-y-0"
               >
                 {o}
               </span>

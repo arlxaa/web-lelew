@@ -38,7 +38,7 @@ export default function LightTunnel({
   const mask = `radial-gradient(ellipse 75% 70% at 50% ${focusY}%, transparent 0%, #000 12%, #000 55%, transparent 100%)`;
 
   return (
-    <div className={`relative isolate overflow-hidden bg-navy-950 ${className}`}>
+    <div className={`light-tunnel relative isolate overflow-hidden bg-navy-950 ${className}`}>
       <style>{`
         @keyframes ${p}-pulse {
           0%, 100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; }

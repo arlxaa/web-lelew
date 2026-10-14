@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { navItems, profile } from "@/lib/content";
 import Monogram from "./Monogram";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +36,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm font-medium text-slate-300 transition-colors hover:text-white hover:text-glow"
+                className="fx-underline relative text-sm font-medium text-slate-300 transition-colors hover:text-white"
               >
                 {item.label}
               </a>
@@ -43,12 +44,15 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden rounded-full border border-white/25 px-5 py-2 text-sm font-semibold text-white transition-all hover:border-white/50 hover:bg-white/10 md:inline-block"
-        >
-          Let&apos;s talk
-        </a>
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+          <a
+            href="#contact"
+            className="rounded-full border border-white/25 px-5 py-2 text-sm font-semibold transition-all duration-200 hover:scale-105 hover:accent-border motion-reduce:hover:scale-100"
+          >
+            Let&apos;s talk
+          </a>
+        </div>
 
         <button
           aria-label="Toggle menu"

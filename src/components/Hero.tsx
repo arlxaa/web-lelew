@@ -42,7 +42,7 @@ export default function Hero() {
           className="relative mt-6 grid items-center gap-0 lg:grid-cols-[1fr_minmax(0,24rem)_1fr]"
         >
           {/* CELESTYN — kiri atas */}
-          <span className="hero-in relative z-10 block self-start whitespace-nowrap font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] text-glow lg:-mt-4 lg:justify-self-end lg:-mr-20 lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.25s" }}>
+          <span className="hero-in text-shimmer relative z-10 block self-start whitespace-nowrap font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] lg:-mt-4 lg:justify-self-end lg:-mr-20 lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.25s" }}>
             {headline.left}
           </span>
 
@@ -52,7 +52,7 @@ export default function Hero() {
           </div>
 
           {/* AURELIXIA — kanan bawah */}
-          <span className="hero-in relative z-10 block self-end whitespace-nowrap text-right font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] text-glow lg:mt-16 lg:justify-self-start lg:-ml-20 lg:text-left lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.4s" }}>
+          <span className="hero-in text-shimmer relative z-10 block self-end whitespace-nowrap text-right font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] lg:mt-16 lg:justify-self-start lg:-ml-20 lg:text-left lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.4s" }}>
             {headline.right}
           </span>
         </div>
@@ -72,7 +72,7 @@ export default function Hero() {
           <div className="mt-7 flex flex-wrap gap-3">
             <a
               href="#about"
-              className="grad-fill glow-soft-hover inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-[#060607] shadow-[0_0_22px_rgba(255,255,255,0.25)] transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow-soft motion-safe:hover:-translate-y-0.5"
+              className="accent-fill accent-glow inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-[#060607] transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 accent-ring motion-safe:hover:translate-x-1"
             >
               Explore My Journey
             </a>

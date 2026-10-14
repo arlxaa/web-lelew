@@ -6,8 +6,17 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  /** ✏️ 'fade' (default) = naik+fade; 'pop' = slide + skala (lebih terasa) */
-  variant?: "fade" | "pop";
+  /** ✏️ gaya masuk: fade=naik+fade, pop=slide+skala, left/right=geser samping, zoom=membesar, blur=fokus */
+  variant?: "fade" | "pop" | "left" | "right" | "zoom" | "blur";
+};
+
+const VARIANT_CLASS: Record<NonNullable<Props["variant"]>, string> = {
+  fade: "reveal",
+  pop: "reveal-pop",
+  left: "reveal-left",
+  right: "reveal-right",
+  zoom: "reveal-zoom",
+  blur: "reveal-blur",
 };
 
 export default function Reveal({ children, className = "", delay = 0, variant = "fade" }: Props) {
@@ -35,7 +44,7 @@ export default function Reveal({ children, className = "", delay = 0, variant = 
   return (
     <div
       ref={ref}
-      className={`${variant === "pop" ? "reveal-pop" : "reveal"} ${visible ? "is-visible" : ""} ${className}`}
+      className={`${VARIANT_CLASS[variant]} ${visible ? "is-visible" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

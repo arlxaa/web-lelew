@@ -65,7 +65,7 @@ export default function Achievements() {
     scrollToIndex(Math.min(Math.max(active + dir, 0), achievements.length - 1));
 
   return (
-    <section id="achievements" className="py-24">
+    <section id="achievements" className="section-pad">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading kicker="Milestones" title="Achievements" />
       </div>
@@ -125,7 +125,7 @@ export default function Achievements() {
         <button
           aria-label="Previous"
           onClick={() => nudge(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-glow/50 hover:shadow-glow disabled:opacity-30"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-all duration-200 hover:scale-110 hover:border-glow/50 disabled:opacity-30 motion-reduce:hover:scale-100"
           disabled={active === 0}
         >
           ‹
@@ -147,7 +147,7 @@ export default function Achievements() {
         <button
           aria-label="Next"
           onClick={() => nudge(1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-glow/50 hover:shadow-glow disabled:opacity-30"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-all duration-200 hover:scale-110 hover:border-glow/50 disabled:opacity-30 motion-reduce:hover:scale-100"
           disabled={active === achievements.length - 1}
         >
           ›

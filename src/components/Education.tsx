@@ -4,12 +4,12 @@ import Reveal from "./Reveal";
 
 export default function Education() {
   return (
-    <section id="education" className="mx-auto max-w-4xl px-6 py-24">
+    <section id="education" className="section-pad mx-auto max-w-4xl px-6">
       <SectionHeading kicker="Academics" title="Education" />
 
       <div className="grid gap-6 sm:grid-cols-2">
         {education.map((e, i) => (
-          <Reveal key={e.school} delay={i * 100}>
+          <Reveal key={e.school} delay={i * 100} variant="zoom">
             <div className="bento h-full p-6">
               <p className="mono text-xs font-medium uppercase tracking-wide text-glow-soft">
                 {e.period}

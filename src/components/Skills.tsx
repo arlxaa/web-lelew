@@ -29,14 +29,14 @@ function SkillCard({
   delay: number;
 }) {
   return (
-    <Reveal delay={delay}>
+    <Reveal delay={delay} variant="blur">
       <div className="bento h-full p-8">
         <h3 className="mb-6 text-lg font-semibold text-white">{title}</h3>
         <ul className="flex flex-wrap gap-3">
           {skills.map((skill) => (
             <li
               key={skill}
-              className="flex items-center gap-2 rounded-lg border border-white/10 bg-navy-800/60 px-4 py-2 text-sm text-slate-200 transition-all hover:border-glow/50 hover:text-white hover:shadow-glow"
+              className="flex items-center gap-2 rounded-lg border border-white/10 bg-navy-800/60 px-4 py-2 text-sm text-slate-200 transition-all duration-200 hover:scale-105 hover:border-glow/50 hover:text-white motion-reduce:hover:scale-100"
             >
               <Icon
                 name={iconFor(skill, fallback)}
@@ -54,7 +54,7 @@ function SkillCard({
 
 export default function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="skills" className="section-pad mx-auto max-w-5xl px-6">
       <SectionHeading kicker="What I Do" title="Skills" />
       <div className="grid gap-8 md:grid-cols-2">
         <SkillCard

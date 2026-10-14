@@ -84,7 +84,7 @@ export default function FeatureCards({
   stagger = 120,
 }: Props) {
   return (
-    <section id={id} className="relative bg-navy-950 px-6 py-24 md:py-32">
+    <section id={id} className="section-pad relative px-6">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <header className="mx-auto mb-14 max-w-2xl text-center">
@@ -106,9 +106,13 @@ export default function FeatureCards({
 
         <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${COLS[cols]}`}>
           {items.map((item, i) => (
-            <Reveal key={item.title} delay={i * stagger} variant="pop">
-              <article className="bento group h-full rounded-2xl border border-navy-700 bg-navy-800/60 p-6 transition duration-300 hover:-translate-y-1 hover:border-white/30 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-navy-700 bg-navy-900 text-glow-violet transition group-hover:text-glow-soft">
+            <Reveal
+              key={item.title}
+              delay={i * stagger}
+              variant={i % 2 === 0 ? "left" : "right"}
+            >
+              <article className="fx-tilt bento group h-full rounded-2xl border border-navy-700 bg-navy-800/60 p-6 transition duration-300 hover:border-white/30 motion-reduce:transition-none">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-navy-700 bg-navy-900 text-glow-violet transition duration-300 group-hover:rotate-[8deg] group-hover:scale-110 group-hover:text-glow-soft motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100">
                   <svg
                     viewBox="0 0 24 24"
                     width="22"

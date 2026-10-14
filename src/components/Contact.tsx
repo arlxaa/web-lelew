@@ -43,7 +43,7 @@ const links: {
 
 export default function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-4xl px-6 py-24">
+    <section id="contact" className="section-pad mx-auto max-w-4xl px-6">
       <SectionHeading kicker="Say Hello" title="Get in Touch" />
 
       <Reveal>
@@ -55,7 +55,7 @@ export default function Contact() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         {links.map((l, i) => (
-          <Reveal key={l.label} delay={i * 80}>
+          <Reveal key={l.label} delay={i * 80} variant="zoom">
             <a
               href={l.href}
               target={l.href.startsWith("http") ? "_blank" : undefined}
