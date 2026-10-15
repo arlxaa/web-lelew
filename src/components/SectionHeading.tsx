@@ -14,7 +14,7 @@ export default function SectionHeading({
         </span>
         <span className="h-px flex-1 bg-gradient-to-r from-glow/40 to-transparent" />
       </div>
-      <h2 className="mt-4 font-display text-2xl font-bold text-white text-glow sm:text-3xl">
+      <h2 className="display-tight mt-4 font-display text-2xl font-bold text-white text-glow sm:text-3xl">
         {title}
       </h2>
     </div>

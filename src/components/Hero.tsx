@@ -15,6 +15,9 @@ const stats = [{ value: profile.gpa, label: "GPA / IPK" }, ...heroStats];
 // ✏️ Headline dipisah dua kata (mengapit visual). Ubah di sini kalau perlu.
 const headline = { left: "CELESTYN", right: "AURELIXIA" };
 
+// Pill badges ala hero Room & Pillar (Domain Expertise / Strategic Capital / Proven Operators).
+const heroPills = ["AI", "Cybersecurity", "UI Design"];
+
 export default function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden text-[#ededf0]">
@@ -37,7 +40,7 @@ export default function Hero() {
           className="relative mt-6 grid items-center gap-0 lg:grid-cols-[1fr_minmax(0,24rem)_1fr]"
         >
           {/* CELESTYN — kiri atas */}
-          <span className="hero-in text-shimmer relative z-10 block self-start whitespace-nowrap font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] lg:-mt-4 lg:justify-self-end lg:-mr-20 lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.25s" }}>
+          <span className="hero-in text-shimmer display-tight relative z-10 block self-start whitespace-nowrap font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] lg:-mt-4 lg:justify-self-end lg:-mr-20 lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.25s" }}>
             {headline.left}
           </span>
 
@@ -47,7 +50,7 @@ export default function Hero() {
           </div>
 
           {/* AURELIXIA — kanan bawah */}
-          <span className="hero-in text-shimmer relative z-10 block self-end whitespace-nowrap text-right font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] lg:mt-16 lg:justify-self-start lg:-ml-20 lg:text-left lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.4s" }}>
+          <span className="hero-in text-shimmer display-tight relative z-10 block self-end whitespace-nowrap text-right font-display font-semibold leading-[0.9] tracking-tight text-[clamp(2.75rem,14vw,5rem)] lg:mt-16 lg:justify-self-start lg:-ml-20 lg:text-left lg:text-[clamp(3.5rem,6vw,6.5rem)]" style={{ animationDelay: "0.4s" }}>
             {headline.right}
           </span>
         </div>
@@ -77,6 +80,18 @@ export default function Hero() {
               Get in Touch
             </a>
           </div>
+
+          {/* Pill badges fokus — pola hero Room & Pillar */}
+          <ul className="mt-7 flex flex-wrap gap-2" aria-label="Focus areas">
+            {heroPills.map((pill) => (
+              <li
+                key={pill}
+                className="mono rounded-full border border-white/15 px-4 py-1.5 text-[0.65rem] uppercase tracking-[0.2em] text-[#ededf0]/70"
+              >
+                {pill}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
@@ -104,8 +119,8 @@ export default function Hero() {
       <style>{`
         .hero-in {
           opacity: 0;
-          transform: translateY(26px);
-          animation: hero-in 0.8s cubic-bezier(.22,.7,.2,1) forwards;
+          transform: translateY(30px);
+          animation: hero-in 0.9s var(--ease-rp-rise, cubic-bezier(.92,.09,.13,.97)) forwards;
         }
         @keyframes hero-in {
           to { opacity: 1; transform: translateY(0); }

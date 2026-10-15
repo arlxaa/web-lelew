@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Space_Grotesk } from "next/font/google";
+import { Poppins, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/lib/content";
 import Teardrops from "@/components/Teardrops";
@@ -20,6 +20,14 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+// Mono labels a la Room & Pillar (Fraktion Mono substitute).
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-rpmono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: `${profile.name} — Computer Science Student`,
   description: profile.tagline,
@@ -36,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${spaceGrotesk.variable} ${spaceMono.variable}`}>
       <head>
         {/* Apply saved theme before paint to avoid a flash */}
         <script

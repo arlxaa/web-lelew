@@ -18,6 +18,11 @@ export default function Loader() {
   useEffect(() => {
     const html = document.documentElement;
     const node = rootRef.current;
+    // Deep links (e.g. /#projects) skip the intro so shared anchors land directly.
+    if (window.location.hash.length > 1) {
+      setGone(true);
+      return;
+    }
     // Lock scroll while the intro is up.
     const prevOverflow = html.style.overflow;
     html.style.overflow = "hidden";
@@ -86,13 +91,23 @@ export default function Loader() {
       <div className="intro-bg" aria-hidden />
 
       <div className="intro-inner">
-        <p className="intro-name intro-name-top text-shimmer">{headlineLeft}</p>
+        <p className="intro-name intro-name-top">
+          <span className="intro-mask">
+            <span className="intro-rise text-shimmer">{headlineLeft}</span>
+          </span>
+        </p>
 
         <div className="intro-constellation intro-dissolve">
           <HeroConstellation className="w-full" />
         </div>
 
-        <p className="intro-name intro-name-bottom text-shimmer">{headlineRight}</p>
+        <p className="intro-name intro-name-bottom">
+          <span className="intro-mask">
+            <span className="intro-rise text-shimmer">{headlineRight}</span>
+          </span>
+        </p>
+
+        <div className="intro-rule" aria-hidden />
 
         {/* Scroll hint — in flow, below the name, so it never overlaps */}
         <button type="button" onClick={exit} className="intro-hint intro-dissolve" aria-label="Scroll down to enter">

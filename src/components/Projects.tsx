@@ -65,7 +65,7 @@ export default function Projects() {
   return (
     <section id="projects" className="section-pad relative px-6">
       <div className="mx-auto max-w-6xl">
-        <Reveal>
+        <Reveal variant="wipe">
           <header className="mx-auto mb-14 max-w-2xl text-center">
             <p className="mono mb-4 text-xs uppercase tracking-[0.28em] text-glow-pink">
               Projects

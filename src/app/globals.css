@@ -17,12 +17,19 @@
   --anchor: rgba(255, 255, 255, 0.08);
   --grid-ink: rgba(255, 255, 255, 0.04);
 
-  /* 10% accent (60/30/10). Default periwinkle; switch via html[data-accent]. */
-  --accent: #7c6cff;        /* periwinkle (from reference) */
-  --accent-rgb: 124, 108, 255;
+  /* 10% accent (60/30/10). Default lime (Room & Pillar); switch via html[data-accent]. */
+  --accent: #d2fe71;        /* lime (Room & Pillar) */
+  --accent-rgb: 210, 254, 113;
+
+  /* Motion language: R&P hover/press easing */
+  --ease-rp: cubic-bezier(.215, .61, .355, 1);
+  /* R&P intro language: snappy rise + soft fade */
+  --ease-rp-rise: cubic-bezier(.92, .09, .13, .97);
+  --ease-rp-fade: cubic-bezier(.645, .045, .355, 1);
 }
 
 /* Accent palettes — flip one attribute to recolor the 10% */
+html[data-accent="lime"]  { --accent: #d2fe71; --accent-rgb: 210, 254, 113; }
 html[data-accent="lilac"]  { --accent: #a78bff; --accent-rgb: 167, 139, 255; }
 html[data-accent="sky"]    { --accent: #6aa8ff; --accent-rgb: 106, 168, 255; }
 html[data-accent="periwinkle"] { --accent: #7c6cff; --accent-rgb: 124, 108, 255; }
@@ -39,6 +46,9 @@ html.light {
   --glow-ink: 124, 108, 255;   /* periwinkle glow in light mode */
   --anchor: rgba(124, 108, 255, 0.16);
   --grid-ink: rgba(90, 78, 160, 0.06);
+  /* Lime is too faint on paper — use a deep lime for accents in light mode */
+  --accent: #4d7c0f;
+  --accent-rgb: 77, 124, 15;
 }
 
 /* Smooth, animated theme switch: longer multi-prop transition (fallback path) */
@@ -225,7 +235,7 @@ html.light .app-cursor {
   background: var(--card);
   backdrop-filter: blur(12px);
   border: 1px solid var(--line);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s var(--ease-rp), border-color 0.3s var(--ease-rp), box-shadow 0.3s var(--ease-rp), background-color 0.3s var(--ease-rp);
   overflow: hidden;
 }
 .bento::before {
@@ -249,10 +259,15 @@ html.light .app-cursor {
 }
 .bento:hover::before { opacity: 1; }
 
-/* Monospace accent for labels, numbers, kickers */
+/* Monospace accent for labels, numbers, kickers — Space Mono (Fraktion Mono substitute) */
 .mono {
-  font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", "JetBrains Mono",
-    Menlo, Consolas, monospace;
+  font-family: var(--font-rpmono), ui-monospace, "SFMono-Regular", "Cascadia Code",
+    "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+/* Tight-tracked display type a la Room & Pillar (their headlines sit at -0.06em) */
+.display-tight {
+  letter-spacing: -0.04em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -295,7 +310,7 @@ html.light .app-cursor {
     0 0 72px rgba(200, 200, 206, 0.1);
 }
 .glow-soft-hover {
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  transition: box-shadow 0.35s var(--ease-rp), transform 0.35s var(--ease-rp);
 }
 .glow-soft-hover:hover {
   box-shadow:
@@ -373,11 +388,27 @@ html.light .app-cursor {
   }
 }
 
+/* ---------- Wipe reveal (Room & Pillar headline entrance: clip-path wipe) ---------- */
+.reveal-wipe {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition:
+    opacity 0.7s var(--ease-rp),
+    clip-path 0.9s var(--ease-rp);
+}
+.reveal-wipe.is-visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-wipe { opacity: 1; clip-path: none; transition: none; }
+}
+
 /* ---------- Hover gestures: varied per element type ---------- */
 
 /* Card tilt+lift — distinct from a plain upward slide. Overrides .bento:hover transform. */
 .fx-tilt {
-  transition: transform 0.35s cubic-bezier(.22,.7,.2,1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s var(--ease-rp), border-color 0.3s var(--ease-rp), box-shadow 0.3s var(--ease-rp);
 }
 .fx-tilt:hover,
 .fx-tilt.bento:hover {
@@ -387,7 +418,7 @@ html.light .app-cursor {
 
 /* Card slide — nudges right + scales, distinct from tilt/lift */
 .fx-slide {
-  transition: transform 0.35s cubic-bezier(.22,.7,.2,1), border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s var(--ease-rp), border-color 0.3s var(--ease-rp), box-shadow 0.3s var(--ease-rp);
 }
 .fx-slide:hover,
 .fx-slide.bento:hover {
@@ -406,7 +437,7 @@ html.light .app-cursor {
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s cubic-bezier(.22,.7,.2,1);
+  transition: transform 0.3s var(--ease-rp);
 }
 .fx-underline:hover::after {
   transform: scaleX(1);
@@ -532,6 +563,41 @@ html.light .text-shimmer {
 .intro-name-top { align-self: flex-start; margin-left: 2%; }
 .intro-name-bottom { align-self: flex-end; margin-right: 2%; }
 
+/* Masked line-rise for the intro names (R&P headline entrance).
+   Outer mask drifts in from opposite sides, inner text rises from below. */
+.intro-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.intro-rise {
+  display: block;
+  transform: translateY(115%);
+  animation: intro-name-rise 1.15s var(--ease-rp-rise) forwards;
+}
+.intro-name-top .intro-rise { animation-delay: 0.35s; }
+.intro-name-bottom .intro-rise { animation-delay: 0.5s; }
+@keyframes intro-name-rise {
+  from { transform: translateY(115%); }
+  to { transform: translateY(0); }
+}
+.intro-name-top .intro-mask { animation: intro-drift-l 1.15s var(--ease-rp-rise) 0.35s both; }
+.intro-name-bottom .intro-mask { animation: intro-drift-r 1.15s var(--ease-rp-rise) 0.5s both; }
+@keyframes intro-drift-l { from { transform: translateX(-36px); } to { transform: translateX(0); } }
+@keyframes intro-drift-r { from { transform: translateX(36px); } to { transform: translateX(0); } }
+
+/* Rule line grows under the names (R&P scaleX rule reveal) */
+.intro-rule {
+  width: min(64vw, 380px);
+  height: 1px;
+  margin: 1.25rem 0 0.25rem;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.9), transparent);
+  transform: scaleX(0);
+  animation: intro-rule-grow 1.2s var(--ease-rp-fade) 0.85s forwards;
+}
+@keyframes intro-rule-grow { to { transform: scaleX(1); } }
+
 .intro-hint {
   margin-top: clamp(1.25rem, 4vh, 2.25rem);
   display: flex;
@@ -568,10 +634,16 @@ html.light .text-shimmer {
   .intro-arrow { animation: none; }
   .intro-hint { animation: none; }
   .intro-name { transition: opacity 0.4s ease; }
+  .intro-mask, .intro-rise, .intro-rule { animation: none; transform: none; }
 }
 
 /* ---------- Whitespace rhythm: let sections breathe ---------- */
 .section-pad { padding-top: clamp(6rem, 12vw, 10rem); padding-bottom: clamp(6rem, 12vw, 10rem); }
+
+/* Editorial hairline between sections (Room & Pillar: 1px rule above each block) */
+main section[id]:not(#top) {
+  border-top: 1px solid var(--line);
+}
 
 /* ---------- 10% accent utilities ---------- */
 .accent-text { color: var(--accent); }
@@ -672,3 +744,44 @@ html.light .text-shimmer {
 html.light .text-\[\#ededf0\],
 html.light .text-\[\#ededf0\]\/80,
 html.light .text-\[\#ededf0\]\/60 { color: #2a2440 !important; }
+
+/* ---------- Inverted light band (Room & Pillar: one light section on dark page) ----------
+   .rp-band reuses the light-mode literal-color remaps below so dark-first
+   components render as ink-on-paper without per-component edits. */
+.rp-band {
+  --card: rgba(255, 255, 255, 0.6);
+  --card-hover: rgba(255, 255, 255, 0.85);
+  --line: rgba(70, 60, 130, 0.12);
+  --line-strong: rgba(70, 60, 130, 0.24);
+  --fg: #2a2440;
+  --fg-dim: rgba(42, 36, 64, 0.62);
+  --glow-ink: 124, 108, 255;
+  --accent: #4d7c0f;
+  --accent-rgb: 77, 124, 15;
+  background-color: #f2f2f6;
+  color: #131419;
+}
+
+.rp-band .text-white { color: #211d33 !important; }
+.rp-band .text-slate-200 { color: #2d2742 !important; }
+.rp-band .text-slate-300 { color: #3d3556 !important; }
+.rp-band .text-slate-400 { color: #5f567e !important; }
+.rp-band .bg-navy-950 { background-color: #eef0fb !important; }
+.rp-band .bg-navy-900 { background-color: #e4e6f7 !important; }
+.rp-band .bg-navy-800\/60 { background-color: rgba(255,255,255,0.68) !important; }
+.rp-band .bg-navy-800\/70 { background-color: rgba(255,255,255,0.8) !important; }
+.rp-band .border-navy-700 { border-color: rgba(70,60,130,0.14) !important; }
+.rp-band .border-white\/10 { border-color: rgba(70,60,130,0.12) !important; }
+.rp-band .border-white\/15 { border-color: rgba(70,60,130,0.16) !important; }
+.rp-band .border-white\/20 { border-color: rgba(70,60,130,0.2) !important; }
+.rp-band .border-white\/25 { border-color: rgba(70,60,130,0.24) !important; }
+.rp-band .bg-white\/5 { background-color: rgba(124,108,255,0.05) !important; }
+.rp-band .bg-white\/10 { background-color: rgba(124,108,255,0.08) !important; }
+.rp-band .text-glow,
+.rp-band .text-glow-soft { color: #2b2545 !important; text-shadow: none; }
+.rp-band .text-glow-pink { color: #5f567e !important; }
+.rp-band .text-glow-violet { color: #3d3556 !important; }
+.rp-band mark.bg-glow-soft { background-color: #7c6cff !important; color: #ffffff !important; }
+.rp-band .text-\[\#ededf0\],
+.rp-band .text-\[\#ededf0\]\/80,
+.rp-band .text-\[\#ededf0\]\/60 { color: #2a2440 !important; }
