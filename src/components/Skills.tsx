@@ -1,4 +1,4 @@
-import { technicalSkills, softSkills } from "@/lib/content";
+import { technicalSkills, softSkills, organizations } from "@/lib/content";
 import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
 import Icon, { type IconName } from "./Icon";
@@ -54,21 +54,46 @@ function SkillCard({
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-pad mx-auto max-w-5xl px-6">
-      <SectionHeading kicker="Toolkit" title="Skills" />
-      <div className="grid gap-8 md:grid-cols-2">
-        <SkillCard
-          title="Technical Skills"
-          skills={technicalSkills}
-          fallback="code"
-          delay={0}
-        />
-        <SkillCard
-          title="Soft Skills"
-          skills={softSkills}
-          fallback="users"
-          delay={120}
-        />
+    <section id="skills" className="section-pad mx-auto max-w-6xl px-6">
+      <SectionHeading kicker="Toolkit & Community" title="Expertise" />
+      <div className="grid gap-8 lg:grid-cols-5">
+        {/* Kiri: skills — lebih lebar */}
+        <div className="grid gap-8 lg:col-span-3">
+          <SkillCard
+            title="Technical Skills"
+            skills={technicalSkills}
+            fallback="code"
+            delay={0}
+          />
+          <SkillCard
+            title="Soft Skills"
+            skills={softSkills}
+            fallback="users"
+            delay={120}
+          />
+        </div>
+
+        {/* Kanan: organizations — sticky */}
+        <Reveal className="lg:col-span-2" delay={160} variant="right">
+          <div className="bento h-full p-8 lg:sticky lg:top-24">
+            <h3 className="mb-2 text-lg font-semibold text-white">
+              Organizations & Clubs
+            </h3>
+            <p className="mb-6 text-sm leading-relaxed text-slate-400">
+              Communities where I learn, compete, and contribute.
+            </p>
+            <ul className="flex flex-col gap-3">
+              {organizations.map((o) => (
+                <li
+                  key={o}
+                  className="rounded-lg border border-white/10 bg-navy-800/60 px-4 py-2.5 text-sm text-slate-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-glow/50 hover:text-white motion-reduce:hover:translate-y-0"
+                >
+                  {o}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

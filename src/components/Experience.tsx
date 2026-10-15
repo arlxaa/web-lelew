@@ -1,4 +1,4 @@
-import { experiences, organizations } from "@/lib/content";
+import { experiences } from "@/lib/content";
 import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
 
@@ -46,23 +46,6 @@ export default function Experience() {
         </div>
       </div>
 
-      <Reveal>
-        <div className="mt-14">
-          <h3 className="mb-5 text-center text-sm font-semibold uppercase tracking-[0.25em] text-glow-soft">
-            Organizations & Clubs
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {organizations.map((o) => (
-              <span
-                key={o}
-                className="rounded-full border border-white/10 bg-navy-800/60 px-4 py-2 text-sm text-slate-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-glow/50 hover:text-white motion-reduce:hover:translate-y-0"
-              >
-                {o}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Reveal>
     </section>
   );
 }

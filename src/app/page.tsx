@@ -17,12 +17,16 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <WhatIDo />
+        <div id="expertise" className="scroll-mt-20">
+          <WhatIDo />
+          <Skills />
+        </div>
         <Projects />
-        <Skills />
-        <Achievements />
-        <Experience />
-        <Education />
+        <div id="journey" className="scroll-mt-20">
+          <Achievements />
+          <Experience />
+          <Education />
+        </div>
         <Contact />
       </main>
       <Footer />

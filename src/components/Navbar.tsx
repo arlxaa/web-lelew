@@ -31,7 +31,7 @@ export default function Navbar() {
           <span>{profile.nickname}</span>
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-6 md:flex lg:gap-8">
           {navItems.map((item) => (
             <li key={item.href}>
               <a
@@ -79,6 +79,16 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+          <div className="flex items-center gap-3 border-t border-white/10 px-6 py-4">
+            <ThemeToggle />
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="flex-1 rounded-full border border-white/25 px-5 py-2 text-center text-sm font-semibold"
+            >
+              Let&apos;s talk
+            </a>
+          </div>
         </div>
       )}
     </header>

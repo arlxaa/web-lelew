@@ -234,6 +234,7 @@ html.light .app-cursor {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
+  pointer-events: none;
   background: linear-gradient(135deg, rgba(var(--glow-ink), 0.35), transparent 40%, transparent 60%, rgba(var(--glow-ink), 0.18));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;

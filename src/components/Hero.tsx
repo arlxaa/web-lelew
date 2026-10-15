@@ -27,7 +27,7 @@ export default function Hero() {
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-5 pt-28 pb-10 sm:px-8">
         {/* Eyebrow */}
         <p className="hero-in mono mb-4 text-xs uppercase tracking-[0.28em] text-glow-soft sm:text-sm" style={{ animationDelay: "0.1s" }}>
-          Hi this is {profile.nickname} :D
+          Hi this is {profile.nickname} 😛😛
         </p>
 
         {/* Headline diagonal mengapit visual */}
@@ -60,8 +60,7 @@ export default function Hero() {
             <mark className="rounded bg-glow-soft px-1.5 py-0.5 font-medium text-[#060607]">
               AI &amp; cybersecurity
             </mark>
-            . National UI design champion and a 1st-Dan black-belt Taekwondo
-            athlete — disciplined, curious, competitive.
+            .
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
