@@ -4,6 +4,7 @@ import "./globals.css";
 import { profile } from "@/lib/content";
 import Teardrops from "@/components/Teardrops";
 import Loader from "@/components/Loader";
+import CursorGlow from "@/components/CursorGlow";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -49,6 +50,8 @@ export default function RootLayout({
         <div className="app-bg" aria-hidden />
         <div className="app-mesh" aria-hidden />
         <div className="app-grid" aria-hidden />
+        <div className="app-cursor" aria-hidden />
+        <CursorGlow />
         <Teardrops />
         {children}
       </body>

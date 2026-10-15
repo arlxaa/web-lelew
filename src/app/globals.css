@@ -117,6 +117,38 @@ html.light .app-bg {
   mask-image: radial-gradient(circle at 50% 40%, black, transparent 85%);
 }
 
+/* Interactive cursor glow — follows the mouse (eased in CursorGlow.tsx) */
+.app-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  --mx: 50%;
+  --my: 40%;
+  background: radial-gradient(
+    26rem 26rem at var(--mx) var(--my),
+    rgba(var(--accent-rgb), 0.14),
+    rgba(var(--accent-rgb), 0.06) 32%,
+    transparent 64%
+  );
+  mix-blend-mode: screen;
+}
+/* Light mode: multiply reads better than screen on a bright bg */
+html.light .app-cursor {
+  mix-blend-mode: multiply;
+  background: radial-gradient(
+    24rem 24rem at var(--mx) var(--my),
+    rgba(var(--accent-rgb), 0.2),
+    rgba(var(--accent-rgb), 0.08) 32%,
+    transparent 64%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-cursor { display: none; }
+}
+
 .text-glow {
   text-shadow: 0 0 12px rgba(var(--glow-ink), 0.18);
 }
@@ -433,6 +465,8 @@ html.light .text-shimmer {
   position: fixed;
   inset: 0;
   z-index: 100;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
   display: grid;
   place-items: center;
   overflow: hidden;

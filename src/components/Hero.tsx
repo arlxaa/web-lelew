@@ -1,4 +1,4 @@
-import { profile } from "@/lib/content";
+import { profile, heroStats } from "@/lib/content";
 import HeroConstellation from "./HeroConstellation";
 import LightTunnel from "./LightTunnel";
 import Reveal from "./Reveal";
@@ -9,13 +9,8 @@ import Reveal from "./Reveal";
  * Semua visual CSS/SVG murni. Tanpa <img>, tanpa library, tanpa glassmorphism.
  */
 
-// ✏️ Edit angka/label statistik di sini
-const stats = [
-  { value: profile.gpa, label: "GPA / IPK" },
-  { value: "8", label: "Years Competitions" },
-  { value: "7+", label: "Awards" },
-  { value: "6", label: "Organizations" },
-];
+// GPA dari profile + statistik lain dari content.ts (heroStats).
+const stats = [{ value: profile.gpa, label: "GPA / IPK" }, ...heroStats];
 
 // ✏️ Headline dipisah dua kata (mengapit visual). Ubah di sini kalau perlu.
 const headline = { left: "CELESTYN", right: "AURELIXIA" };

@@ -17,6 +17,13 @@ export const profile = {
   instagramHandle: "@arlxaa_",
 };
 
+// ✏️ Statistik di strip Hero. value boleh string ("7+", "8") agar fleksibel.
+export const heroStats = [
+  { value: "8", label: "Years Competitions" },
+  { value: "7+", label: "Awards" },
+  { value: "6", label: "Organizations" },
+];
+
 export const about = {
   summary:
     "An undergraduate Computer Science student at Bina Nusantara University with a strong interest in artificial intelligence, cybersecurity, and problem solving. A national UI design champion and long-time Taekwondo athlete (1st Dan black belt) with 8 years of competition and active involvement across tech, research, and student organizations.",
@@ -201,9 +208,11 @@ export const education: Education[] = [
 
 export const navItems = [
   { label: "About", href: "#about" },
+  { label: "What I Do", href: "#what-i-do" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Achievements", href: "#achievements" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
+  { label: "Contact", href: "#contact" },
 ];

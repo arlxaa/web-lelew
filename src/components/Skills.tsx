@@ -55,7 +55,7 @@ function SkillCard({
 export default function Skills() {
   return (
     <section id="skills" className="section-pad mx-auto max-w-5xl px-6">
-      <SectionHeading kicker="What I Do" title="Skills" />
+      <SectionHeading kicker="Toolkit" title="Skills" />
       <div className="grid gap-8 md:grid-cols-2">
         <SkillCard
           title="Technical Skills"

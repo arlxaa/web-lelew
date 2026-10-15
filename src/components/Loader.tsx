@@ -13,9 +13,11 @@ export default function Loader() {
   const [leaving, setLeaving] = useState(false);
   const [gone, setGone] = useState(false);
   const exited = useRef(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const html = document.documentElement;
+    const node = rootRef.current;
     // Lock scroll while the intro is up.
     const prevOverflow = html.style.overflow;
     html.style.overflow = "hidden";
@@ -32,27 +34,38 @@ export default function Loader() {
       if (e.deltaY > 0) exit();
     };
     let touchStartY = 0;
+    let touchMoved = false;
     const onTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0]?.clientY ?? 0;
+      touchMoved = false;
     };
     const onTouchMove = (e: TouchEvent) => {
       const y = e.touches[0]?.clientY ?? 0;
-      if (touchStartY - y > 24) exit(); // swipe up = scroll down
+      if (Math.abs(touchStartY - y) > 6) touchMoved = true;
+      if (touchStartY - y > 16) exit(); // swipe up = scroll down
+    };
+    // Tap anywhere on the intro also enters (mobile swipe can be flaky across browsers).
+    const onTouchEnd = () => {
+      if (!touchMoved) exit();
     };
     const onKey = (e: KeyboardEvent) => {
       if (["ArrowDown", "PageDown", " ", "Enter", "End"].includes(e.key)) exit();
     };
 
+    // Bind to the intro node itself (plus window for wheel/key) so touch is
+    // captured even while body scroll is locked.
     window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("keydown", onKey);
+    node?.addEventListener("touchstart", onTouchStart, { passive: true });
+    node?.addEventListener("touchmove", onTouchMove, { passive: true });
+    node?.addEventListener("touchend", onTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("keydown", onKey);
+      node?.removeEventListener("touchstart", onTouchStart);
+      node?.removeEventListener("touchmove", onTouchMove);
+      node?.removeEventListener("touchend", onTouchEnd);
       html.style.overflow = prevOverflow || "";
     };
   }, []);
@@ -68,7 +81,7 @@ export default function Loader() {
   };
 
   return (
-    <div className={`intro ${leaving ? "intro-leaving" : ""}`} role="dialog" aria-label="Intro">
+    <div ref={rootRef} className={`intro ${leaving ? "intro-leaving" : ""}`} role="dialog" aria-label="Intro">
       {/* Backdrop layers so it feels like the real page */}
       <div className="intro-bg" aria-hidden />
 
@@ -83,7 +96,7 @@ export default function Loader() {
 
         {/* Scroll hint — in flow, below the name, so it never overlaps */}
         <button type="button" onClick={exit} className="intro-hint intro-dissolve" aria-label="Scroll down to enter">
-          <span className="mono intro-hint-text">scroll to enter</span>
+          <span className="mono intro-hint-text">scroll or tap to enter</span>
           <span className="intro-arrow" aria-hidden>
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 5v14M6 13l6 6 6-6" />

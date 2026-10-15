@@ -34,7 +34,7 @@ const projects: Project[] = [
     demo: "https://jedagjedug.vercel.app/",
   },
   {
-    title: "Good OLd' Bakery",
+    title: "Good Old Bakery",
     blurb:
       "Final project for Human–Computer Interaction. A multi-page bakery website built around user-centered design — clear navigation, product filtering, a location finder, and form validation.",
     tags: ["HTML", "CSS", "JavaScript", "Figma", "UI/UX"],
