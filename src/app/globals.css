@@ -443,6 +443,11 @@ html.light .app-cursor {
   transform: scaleX(1);
 }
 
+/* Scroll-spy active link: underline stays on */
+.nav-active::after {
+  transform: scaleX(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fx-tilt:hover, .fx-tilt.bento:hover { transform: none; }
   .fx-slide:hover, .fx-slide.bento:hover { transform: none; }

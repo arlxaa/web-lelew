@@ -8,12 +8,46 @@ import ThemeToggle from "./ThemeToggle";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the nav link whose section sits in the middle band.
+  useEffect(() => {
+    const ids = navItems.map((n) => n.href.slice(1));
+    const ratios: Record<string, number> = {};
+    const pickBest = () => {
+      let best: string | null = null;
+      let bestRatio = 0;
+      for (const id of ids) {
+        const r = ratios[id] ?? 0;
+        if (r > bestRatio) {
+          bestRatio = r;
+          best = `#${id}`;
+        }
+      }
+      setActive(best);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) ratios[e.target.id] = e.intersectionRatio;
+          else delete ratios[e.target.id];
+        }
+        pickBest();
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
   }, []);
 
   return (
@@ -32,16 +66,22 @@ export default function Navbar() {
         </a>
 
         <ul className="hidden items-center gap-6 md:flex lg:gap-8">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="fx-underline relative text-sm font-medium text-slate-300 transition-colors hover:text-white"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = active === item.href;
+            return (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`fx-underline relative text-sm font-medium transition-colors hover:text-white ${
+                    isActive ? "nav-active text-white" : "text-slate-300"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -67,17 +107,23 @@ export default function Navbar() {
       {open && (
         <div className="glass border-t border-white/10 md:hidden">
           <ul className="flex flex-col px-6 py-4">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-base font-medium text-slate-200 hover:text-white"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const isActive = active === item.href;
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`block py-3 text-base font-medium hover:text-white ${
+                      isActive ? "accent-text" : "text-slate-200"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
           <div className="flex items-center gap-3 border-t border-white/10 px-6 py-4">
             <ThemeToggle />
