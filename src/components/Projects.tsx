@@ -42,6 +42,16 @@ const projects: Project[] = [
     cover: "/covers/bakery.png",
     demo: "https://bakery-hci.vercel.app/",
   },
+  {
+    title: "Lucky Jackpot88",
+    blurb:
+      "A single-player virtual circus arcade (no real money). Four games — slots with 5 paylines, a 3D coin pusher, scratch cards, roulette — plus a coin-catch rescue mode, Google login, and a global leaderboard.",
+    tags: ["React", "TypeScript", "Three.js", "Firebase", "Tailwind"],
+    categories: ["for-fun"],
+    cover: "/covers/lucky-jackpot88.png",
+    demo: "https://luckyjackpot88.vercel.app/",
+    repo: "https://github.com/arlxaa/luckyjackpot88",
+  },
 ];
 
 /** Preview placeholder monokrom (CSS murni, tanpa aset) — dipakai jika belum ada cover */

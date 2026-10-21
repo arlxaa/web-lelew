@@ -215,8 +215,8 @@ html.light .app-cursor {
   height: 11px;
   /* teardrop shape: round bottom, pointed top */
   border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.85));
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, rgba(165, 190, 255, 0), rgba(190, 208, 255, 0.85));
+  box-shadow: 0 0 10px rgba(140, 170, 255, 0.55);
   opacity: 0;
   transform: rotate(180deg);
   animation: fall linear infinite;
@@ -226,6 +226,104 @@ html.light .app-cursor {
   8%   { opacity: 0.9; }
   92%  { opacity: 0.6; }
   100% { transform: translateY(108vh) rotate(180deg); opacity: 0; }
+}
+
+/* ---------- Night sky (midnight-navy backdrop, CSS-only) ---------- */
+.night-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 18% 0%, rgba(50, 80, 200, 0.16), transparent 65%),
+    radial-gradient(50% 40% at 86% 14%, rgba(70, 110, 230, 0.13), transparent 65%),
+    radial-gradient(75% 55% at 50% 112%, rgba(40, 70, 180, 0.18), transparent 70%);
+}
+.ns-star {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.2;
+  animation: ns-twinkle var(--ns-d, 4s) ease-in-out infinite;
+  animation-delay: var(--ns-dl, 0s);
+}
+@keyframes ns-twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+/* moon: small bright disc wrapped in a wide halo */
+.ns-moon-disc {
+  position: absolute;
+  top: 7%;
+  right: 9%;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 38% 35%, #ffffff, #cdd9ff 55%, #9db4f5 100%);
+  box-shadow:
+    0 0 24px rgba(205, 217, 255, 0.9),
+    0 0 70px rgba(160, 185, 255, 0.5);
+}
+.ns-moon {
+  position: absolute;
+  top: -6%;
+  right: -4%;
+  width: 34vmax;
+  height: 34vmax;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(140, 170, 255, 0.16), transparent 65%);
+}
+/* low glowing clouds */
+.ns-cloud {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(46px);
+}
+.ns-cloud-a {
+  left: -12%;
+  bottom: -14%;
+  width: 62vw;
+  height: 36vh;
+  background: radial-gradient(closest-side, rgba(90, 130, 255, 0.3), rgba(60, 90, 220, 0.12) 55%, transparent 75%);
+}
+.ns-cloud-b {
+  right: -14%;
+  bottom: -10%;
+  width: 56vw;
+  height: 32vh;
+  background: radial-gradient(closest-side, rgba(110, 150, 255, 0.26), rgba(70, 100, 225, 0.1) 55%, transparent 75%);
+}
+.ns-cloud-c {
+  left: 8%;
+  top: -12%;
+  width: 70vw;
+  height: 26vh;
+  background: radial-gradient(closest-side, rgba(70, 100, 220, 0.16), transparent 72%);
+}
+/* shooting star sweeping down-left every ~11s */
+.ns-shoot {
+  position: absolute;
+  top: 12%;
+  right: 6%;
+  width: 180px;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(205, 220, 255, 0), rgba(220, 230, 255, 0.95));
+  filter: drop-shadow(0 0 6px rgba(190, 205, 255, 0.9));
+  opacity: 0;
+  transform: rotate(-18deg);
+  animation: ns-shoot 11s linear infinite;
+}
+@keyframes ns-shoot {
+  0%, 86% { transform: translate3d(0, 0, 0) rotate(-18deg); opacity: 0; }
+  88% { opacity: 1; }
+  94%, 100% { transform: translate3d(-46vw, 24vh, 0) rotate(-18deg); opacity: 0; }
+}
+/* Light mode keeps the daylight look — night sky only makes sense on dark */
+html.light .night-sky { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ns-star, .ns-shoot { animation: none; }
+  .ns-star { opacity: 0.7; }
 }
 
 /* Bento card: subtle glass panel with an animated gold glowing border on hover */

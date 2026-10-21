@@ -30,7 +30,7 @@ export default function LightTunnel({
   const gradR = `${p}gr`;
 
   // ✏️ Warna garis perspektif (alpha) & kerapatan (derajat per garis)
-  const lineAlpha = 0.12;
+  const lineAlpha = 0.055;
   const lineGap = 5;
 
   const rays = `repeating-conic-gradient(from 0deg at 50% ${focusY}%, rgba(244,244,246,${lineAlpha}) 0deg 0.35deg, transparent 0.35deg ${lineGap}deg)`;
@@ -38,7 +38,7 @@ export default function LightTunnel({
   const mask = `radial-gradient(ellipse 75% 70% at 50% ${focusY}%, transparent 0%, #000 12%, #000 55%, transparent 100%)`;
 
   return (
-    <div className={`light-tunnel relative isolate overflow-hidden bg-navy-950 ${className}`}>
+    <div className={`light-tunnel relative isolate overflow-hidden bg-transparent ${className}`}>
       <style>{`
         @keyframes ${p}-pulse {
           0%, 100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; }
@@ -78,17 +78,18 @@ export default function LightTunnel({
         aria-hidden
         className={`${p}-pull pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 rounded-full`}
         style={{
-          border: "1px solid rgba(244,244,246,0.25)",
+          border: "1px solid rgba(244,244,246,0.15)",
           boxShadow: "0 0 0 1px rgba(244,244,246,0.06), inset 0 0 60px rgba(244,244,246,0.05)",
         }}
       />
 
-      {/* Bukit gelombang kiri-kanan (SVG) */}
+      {/* Bukit gelombang kiri-kanan (SVG) — semi-transparan agar awan malam terlihat */}
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[70%] w-full"
         viewBox="0 0 1440 600"
         preserveAspectRatio="none"
+        opacity={0.62}
       >
         <defs>
           {/* ✏️ stop warna: hitam -> abu */}
@@ -115,13 +116,13 @@ export default function LightTunnel({
         <path
           d="M0 210 C 140 190 300 260 430 360 C 510 420 560 520 620 600"
           fill="none"
-          stroke="rgba(244,244,246,0.22)"
+          stroke="rgba(244,244,246,0.13)"
           strokeWidth="1"
         />
         <path
           d="M1440 210 C 1300 190 1140 260 1010 360 C 930 420 880 520 820 600"
           fill="none"
-          stroke="rgba(244,244,246,0.22)"
+          stroke="rgba(244,244,246,0.13)"
           strokeWidth="1"
         />
       </svg>
@@ -133,17 +134,7 @@ export default function LightTunnel({
         style={{
           top: `${focusY}%`,
           background:
-            "radial-gradient(circle, rgba(244,244,246,0.95) 0%, rgba(244,244,246,0.35) 12%, rgba(154,154,162,0.12) 38%, transparent 68%)",
-        }}
-      />
-
-      {/* Vignette bawah/atas biar nyatu sama section berikutnya */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(to bottom, #060607 0%, transparent 18%, transparent 70%, #060607 100%)",
+            "radial-gradient(circle, rgba(244,244,246,0.7) 0%, rgba(244,244,246,0.26) 12%, rgba(154,154,162,0.09) 38%, transparent 68%)",
         }}
       />
 

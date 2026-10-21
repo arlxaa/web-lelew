@@ -3,6 +3,7 @@ import { Poppins, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/lib/content";
 import Teardrops from "@/components/Teardrops";
+import NightSky from "@/components/NightSky";
 import Loader from "@/components/Loader";
 import CursorGlow from "@/components/CursorGlow";
 
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Loader />
         <div className="app-bg" aria-hidden />
+        <NightSky />
         <div className="app-mesh" aria-hidden />
         <div className="app-grid" aria-hidden />
         <div className="app-cursor" aria-hidden />
