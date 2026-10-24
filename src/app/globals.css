@@ -112,56 +112,60 @@ html[data-theme="garage"] {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Theme: Glass (rubens.design, 2026 liquid glass)
+   Theme: Retro (Windows 98: teal desktop, grey bevels, navy title bars)
    ───────────────────────────────────────────────────────────── */
-html[data-theme="glass"] {
+html[data-theme="retro"] {
   color-scheme: light;
-  --bg: #f2f2f5; --bg-2: rgba(255,255,255,.72); --bg-3: rgba(0,0,0,.04); --bg-inset: rgba(0,0,0,.03);
-  --fg: #1d1d1f; --fg-2: #48484a; --fg-3: #8e8e93; --fg-4: #c7c7cc;
-  --line: rgba(0,0,0,.08); --line-2: rgba(0,0,0,.14); --line-3: rgba(0,0,0,.26);
-  --accent: #007aff; --accent-2: #5ac8fa; --accent-ink: #fff;
-  --accent-dim: rgba(0,122,255,.1); --accent-line: rgba(0,122,255,.3);
-  --ok: #34c759; --warn: #ff9f0a; --danger: #ff3b30;
-  --selection: rgba(0,122,255,.25); --selection-fg: #1d1d1f;
+  --bg: #d4d0c8; --bg-2: #c0c0c0; --bg-3: #b8b8b8; --bg-inset: #ffffff;
+  --fg: #000000; --fg-2: #222222; --fg-3: #505050; --fg-4: #808080;
+  --line: #a0a0a0; --line-2: #808080; --line-3: #404040;
+  --accent: #000080; --accent-2: #1084d0; --accent-ink: #ffffff;
+  --accent-dim: rgba(0,0,128,.1); --accent-line: rgba(0,0,128,.45);
+  --ok: #008000; --warn: #808000; --danger: #c00000;
+  --selection: #000080; --selection-fg: #ffffff;
 
-  --font-ui: var(--font-figtree), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-  --font-display: var(--font-figtree), system-ui, sans-serif;
-  --font-title: var(--font-figtree), system-ui, sans-serif;
-  --display-weight: 600; --display-tracking: -.03em;
-  --title-weight: 700; --title-tracking: -.03em; --title-transform: none;
-  --title-size: clamp(32px, 4.2vw, 54px);
+  /* Classic raised / sunken bevels */
+  --bevel-out: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  --bevel-in: inset -1px -1px #ffffff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
 
-  --r-window: 18px; --r-card: 22px; --r-chip: 999px; --r-btn: 999px;
-  --win-bg: rgba(255,255,255,.66);
-  --win-border: rgba(255,255,255,.7);
-  --win-shadow: 0 8px 32px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.9);
-  --win-shadow-active: 0 20px 56px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.95);
-  --win-blur: blur(24px) saturate(1.8);
-  --titlebar-bg: transparent;
-  --title-font: var(--font-figtree); --title-weight-bar: 600;
+  --font-ui: Tahoma, Verdana, "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-pixel);
+  --font-display: var(--font-pixel);
+  --font-title: var(--font-pixel);
+  --display-weight: 400; --display-tracking: -.01em;
+  --title-weight: 400; --title-tracking: 0; --title-transform: none;
+  --title-size: clamp(28px, 3.6vw, 46px);
 
-  --dock-bg: rgba(255,255,255,.45);
-  --dock-border: rgba(255,255,255,.75);
-  --dock-shadow: 0 10px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.9);
-  --dock-radius: 26px;
-  --tooltip-bg: rgba(29,29,31,.88); --tooltip-fg: #fff;
-  --topbar-bg: rgba(255,255,255,.45);
+  --r-window: 0px; --r-card: 0px; --r-chip: 0px; --r-btn: 0px;
+  --win-bg: #c0c0c0;
+  --win-border: #c0c0c0;
+  --win-shadow: var(--bevel-out), 4px 4px 0 rgba(0,0,0,.25);
+  --win-shadow-active: var(--bevel-out), 6px 6px 0 rgba(0,0,0,.3);
+  --win-blur: none;
+  --titlebar-bg: linear-gradient(90deg, #000080, #1084d0);
+  --title-font: var(--font-ui); --title-weight-bar: 700;
 
-  --hero-bg: linear-gradient(160deg, #fafafa 0%, #f0f0f2 50%, #e8e8ed 100%);
-  --name-fill: #ffffff;
-  --name-filter: drop-shadow(0 2px 2px rgba(0,0,0,.035)) drop-shadow(0 18px 36px rgba(0,0,0,.05));
-  --name-hot: drop-shadow(5px 0 0 rgba(255,59,48,.35)) drop-shadow(-5px 0 0 rgba(0,122,255,.35));
+  --dock-bg: #c0c0c0;
+  --dock-border: #c0c0c0;
+  --dock-shadow: var(--bevel-out), 0 6px 0 rgba(0,0,0,.2);
+  --dock-radius: 0px;
+  --tooltip-bg: #ffffe1; --tooltip-fg: #000000;
+  --topbar-bg: #c0c0c0;
+
+  --hero-bg: #008080;
+  --name-fill: #0b8f8f;
+  --name-filter: drop-shadow(2px 2px 0 rgba(0,0,0,.18));
+  --name-hot: drop-shadow(4px 4px 0 #000080) drop-shadow(-3px -3px 0 #ffffff);
   --scanlines: 0; --grain: 0;
 
-  --term-bg: rgba(28,28,30,.94); --term-fg: #f5f5f7; --term-dim: #8e8e93; --term-accent: #30d158;
-  --term-glow: none; --term-border: rgba(255,255,255,.08);
+  --term-bg: #000000; --term-fg: #c0c0c0; --term-dim: #808080; --term-accent: #ffffff;
+  --term-glow: none; --term-border: #000000;
 
-  --sheet-head: rgba(0,0,0,.035); --sheet-grid: rgba(0,0,0,.07); --sheet-sel: rgba(0,122,255,.12);
-  --card-bg: rgba(255,255,255,.62); --card-border: rgba(255,255,255,.8); --card-shadow: 0 8px 30px rgba(0,0,0,.06);
-  --chip-bg: rgba(255,255,255,.7); --chip-border: rgba(0,0,0,.08); --chip-fg: #48484a;
-  --btn-bg: #1d1d1f; --btn-fg: #fff;
-  --shadow-pop: 0 16px 40px rgba(0,0,0,.14);
+  --sheet-head: #c0c0c0; --sheet-grid: #c0c0c0; --sheet-sel: #000080;
+  --card-bg: #c0c0c0; --card-border: #c0c0c0; --card-shadow: var(--bevel-out);
+  --chip-bg: #c0c0c0; --chip-border: #808080; --chip-fg: #000000;
+  --btn-bg: #c0c0c0; --btn-fg: #000000;
+  --shadow-pop: var(--bevel-out), 4px 4px 0 rgba(0,0,0,.3);
 }
 
 /* ─────────────────────────────────────────────────────────────

@@ -33,7 +33,7 @@ const HELP: [string, string][] = [
   ["skills", "the toolbox"],
   ["music", "what's on repeat"],
   ["contact", "say hi"],
-  ["theme <glass|garage|claude>", "switch era"],
+  ["theme <retro|garage|claude>", "switch era"],
   ["pet | nap | wake", "talk to Clawd"],
   ["open <app>", "open a window (try: open gallery)"],
   ["clear", "clean the screen"],

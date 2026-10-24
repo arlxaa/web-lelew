@@ -102,7 +102,7 @@ const INTENTS: { keys: string[]; answer: () => ChatAnswer }[] = [
   {
     keys: ["site", "website", "this", "made this", "theme", "design"],
     answer: () => ({
-      text: "LELE.OS is built with Next.js. The desktop takes after rubens.design, the terminal and timeline after bryangarage.dev, and the boot sequence after sibaldesign.com. Try the Glass / Garage / Claude switch up top.",
+      text: "LELE.OS is built with Next.js. The desktop takes after rubens.design, the terminal and timeline after bryangarage.dev, and the boot sequence after sibaldesign.com. Try the Retro / Garage / Claude switch up top.",
     }),
   },
   {

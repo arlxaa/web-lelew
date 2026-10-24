@@ -1,15 +1,14 @@
 import {
-  Figtree,
   Geist,
   Geist_Mono,
   Instrument_Serif,
-  JetBrains_Mono,
   Source_Serif_4,
   Unbounded,
 } from "next/font/google";
 import localFont from "next/font/local";
 
-// Garage (default) fonts are preloaded; Glass/Claude-only families load on demand.
+// Garage (default) fonts are preloaded; Claude-only families load on demand.
+// Retro uses Departure Mono plus system Tahoma / Verdana.
 export const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 export const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 export const unbounded = Unbounded({ subsets: ["latin"], weight: "900", variable: "--font-unbounded" });
@@ -25,8 +24,6 @@ export const instrument = Instrument_Serif({
   variable: "--font-instrument",
   preload: false,
 });
-export const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", preload: false });
-export const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", preload: false });
 export const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   style: ["normal", "italic"],
@@ -34,6 +31,6 @@ export const sourceSerif = Source_Serif_4({
   preload: false,
 });
 
-export const fontVariables = [geist, geistMono, unbounded, departure, instrument, figtree, jetbrains, sourceSerif]
+export const fontVariables = [geist, geistMono, unbounded, departure, instrument, sourceSerif]
   .map((f) => f.variable)
   .join(" ");

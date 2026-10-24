@@ -25,7 +25,7 @@ export const profile = {
   since: "2025",
 };
 
-export type SocialId = "github" | "linkedin" | "instagram";
+export type SocialId = "github" | "linkedin" | "instagram" | "spotify";
 
 export const socials: { id: SocialId; label: string; handle: string; href: string }[] = [
   { id: "github", label: "GitHub", handle: "arlxaa", href: "https://github.com/arlxaa" },
@@ -40,6 +40,12 @@ export const socials: { id: SocialId; label: string; handle: string; href: strin
     label: "Instagram",
     handle: "@arlxaa_",
     href: "https://www.instagram.com/arlxaa_/",
+  },
+  {
+    id: "spotify",
+    label: "Spotify",
+    handle: "Lele's playlists",
+    href: "https://open.spotify.com/user/31czaewphnhdxscstpy2qmnffxly",
   },
 ];
 

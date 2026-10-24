@@ -8,7 +8,8 @@ with a terminal) and **sibaldesign.com** (boot sequence, numbered sections, log 
 
 - **Layout: hybrid.** The first screen is a Rubens-style desktop: giant name typography,
   top bar, dock and draggable windows. Scrolling down leads into long-form sections.
-- **Themes: switcher with 3 eras.** Glass (Rubens light), Garage (Bryan dark + orange,
+- **Themes: switcher with 3 eras.** Retro (Windows 98; replaced the original Rubens-style Glass
+  theme on 2026-10-25), Garage (Bryan dark + orange,
   **default**) and Claude (warm cream + terracotta, plus a cute pixel pet "Clawd").
   Sibal's navy/cyan sci-fi palette is **not** used, only its structure and interactions.
 - **Projects:** take a reference layout, but **no dither effect**.
@@ -68,16 +69,16 @@ with a terminal) and **sibaldesign.com** (boot sequence, numbered sections, log 
 
 ## Theme tokens (to implement in `src/app/globals.css`)
 
-| token | Garage (default) | Glass | Claude |
+| token | Garage (default) | Retro | Claude |
 |---|---|---|---|
-| bg / bg-2 / bg-3 | #141414 / #191919 / #1f2024 | #F2F2F5 (+gradient) / rgba(255,255,255,.72) / rgba(0,0,0,.04) | #FAF9F5 / #FFFFFF / #F0EEE6 |
-| fg … fg-4 | #fff #dadbdf #7d8187 #4b4e54 | #1D1D1F #48484A #8E8E93 #C7C7CC | #141413 #3D3D3A #73726C #B0AEA5 |
-| line / line-2 | #212327 / rgba(255,255,255,.14) | rgba(0,0,0,.08) / .14 | #E8E6DC / rgba(31,30,29,.18) |
-| accent | #ff7a17 | #007AFF | #D97757 (deep #C6613F) |
-| fonts ui / mono / title | Geist / Geist Mono / Departure Mono | Figtree / JetBrains Mono / Figtree 700 | Geist / Geist Mono / Source Serif 4 |
-| window | rgba(25,25,25,.94) r12 + blur | rgba(255,255,255,.66) r18 blur(24) saturate(1.8) | #fff r14, warm soft shadow |
-| name letters | #1c1c1c on #141414 + scanlines | white with soft emboss | #F3F0E8 on cream + grain |
-| terminal | amber CRT #140d02 / #ffd899 / #ff9d00 | dark glass #1c1c1e, green prompt | Claude Code style #1F1E1D / #F0EEE6 / #D97757 |
+| bg / bg-2 / bg-3 | #141414 / #191919 / #1f2024 | #D4D0C8 / #C0C0C0 / #B8B8B8 | #FAF9F5 / #FFFFFF / #F0EEE6 |
+| fg … fg-4 | #fff #dadbdf #7d8187 #4b4e54 | #000 #222 #505050 #808080 | #141413 #3D3D3A #73726C #B0AEA5 |
+| line / line-2 | #212327 / rgba(255,255,255,.14) | #A0A0A0 / #808080 | #E8E6DC / rgba(31,30,29,.18) |
+| accent | #ff7a17 | #000080 (title bar gradient to #1084D0) | #D97757 (deep #C6613F) |
+| fonts ui / mono / title | Geist / Geist Mono / Departure Mono | Tahoma, Verdana / Departure Mono / Departure Mono | Geist / Geist Mono / Source Serif 4 |
+| window | rgba(25,25,25,.94) r12 + blur | #C0C0C0 r0, 3D bevel box-shadows, hard drop shadow | #fff r14, warm soft shadow |
+| name letters | #1c1c1c on #141414 + scanlines | #0B8F8F on #008080 teal desktop | #F3F0E8 on cream + grain |
+| terminal | amber CRT #140d02 / #ffd899 / #ff9d00 | MS-DOS #000 / #C0C0C0 / #FFF | Claude Code style #1F1E1D / #F0EEE6 / #D97757 |
 
 ## Build plan (done 2026-10-24)
 

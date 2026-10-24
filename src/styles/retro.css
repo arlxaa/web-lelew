@@ -1,0 +1,63 @@
+/* ───────── Retro theme details (Windows 98) ─────────
+   Tokens live in globals.css; these are the bits tokens can't express. */
+html[data-theme="retro"] ::-webkit-scrollbar { width: 16px; height: 16px; background: #dfdfdf; }
+html[data-theme="retro"] ::-webkit-scrollbar-thumb { background: #c0c0c0; box-shadow: var(--bevel-out); }
+html[data-theme="retro"] ::-webkit-scrollbar-track { background: repeating-conic-gradient(#c0c0c0 0 25%, #ffffff 0 50%) 0 0 / 2px 2px; }
+
+/* Windows */
+html[data-theme="retro"] .win { padding: 3px; }
+html[data-theme="retro"] .win__bar { height: 26px; padding: 0 3px 0 6px; border-bottom: 0; }
+html[data-theme="retro"] .win:not([data-active]) .win__bar { background: linear-gradient(90deg, #808080, #b5b5b5); }
+html[data-theme="retro"] .win__title { color: #fff; font-size: 12px; }
+html[data-theme="retro"] .win__btns { gap: 2px; }
+html[data-theme="retro"] .win__btn,
+html[data-theme="retro"] .win[data-active] .win__btn--min,
+html[data-theme="retro"] .win[data-active] .win__btn--close {
+  width: 18px; height: 16px; border-radius: 0; background: #c0c0c0; box-shadow: var(--bevel-out);
+  color: #000; font: 700 12px/1 var(--font-ui);
+}
+html[data-theme="retro"] .win__btn:active { box-shadow: var(--bevel-in); }
+html[data-theme="retro"] .win__body { margin-top: 2px; background: var(--bg-inset); box-shadow: var(--bevel-in); padding: 2px; }
+html[data-theme="retro"] .sheet-modal__bar { background: var(--titlebar-bg); color: #fff; }
+html[data-theme="retro"] .sheet-modal__bar .win__title { color: #fff; }
+
+/* Taskbar-style dock and top bar */
+html[data-theme="retro"] .dock { backdrop-filter: none; -webkit-backdrop-filter: none; }
+html[data-theme="retro"] .dock__item[data-running]::after { border-radius: 0; background: #000080; }
+html[data-theme="retro"] .dock__tip { border: 1px solid #000; border-radius: 0; font-weight: 400; }
+html[data-theme="retro"] .topbar { backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 0; box-shadow: var(--bevel-out); color: #000; }
+html[data-theme="retro"] .topbar__mark { border-radius: 0; background: #000080; border-color: #000080; color: #fff; }
+
+/* Buttons, chips, inputs */
+html[data-theme="retro"] .btn-primary,
+html[data-theme="retro"] .btn-ghost { background: #c0c0c0; color: #000; border: 0; box-shadow: var(--bevel-out); transform: none; filter: none; }
+html[data-theme="retro"] .btn-primary { outline: 1px solid #000; outline-offset: -1px; font-weight: 700; }
+html[data-theme="retro"] .btn-primary:active,
+html[data-theme="retro"] .btn-ghost:active { box-shadow: var(--bevel-in); }
+html[data-theme="retro"] .btn-ghost:hover { color: #000080; }
+html[data-theme="retro"] .chip { border: 0; box-shadow: var(--bevel-out); }
+html[data-theme="retro"] .chip--accent { background: #000080; color: #fff; }
+html[data-theme="retro"] .kbd { border-radius: 0; box-shadow: var(--bevel-out); background: #c0c0c0; color: #000; }
+html[data-theme="retro"] input,
+html[data-theme="retro"] textarea { border-radius: 0 !important; background: #fff; box-shadow: var(--bevel-in); }
+
+/* Panels and cards */
+html[data-theme="retro"] .palette { border-radius: 0; border: 0; padding: 3px; }
+html[data-theme="retro"] .stack__card { border: 0; padding: 3px; background: #c0c0c0; }
+html[data-theme="retro"] .stack__chrome { border-bottom: 0; color: #fff; height: 26px; }
+html[data-theme="retro"] .stack__url { background: transparent; color: #fff; font-family: var(--font-ui); font-weight: 700; text-align: left; }
+html[data-theme="retro"] .stack__dots { display: none; }
+html[data-theme="retro"] .tl__bar { border-radius: 0; border: 0; box-shadow: var(--bevel-out); background: #c0c0c0; }
+html[data-theme="retro"] .tl__bar[data-live] { background: linear-gradient(90deg, #000080, #1084d0); }
+html[data-theme="retro"] .tl__bar[data-live] .tl__bar-main,
+html[data-theme="retro"] .tl__bar[data-live] .tl__bar-sub { color: #fff; }
+html[data-theme="retro"] .timeline__dot { border-radius: 0; }
+html[data-theme="retro"] .timeline,
+html[data-theme="retro"] .cmdk-pill,
+html[data-theme="retro"] .term-pill { border-radius: 0; border: 0; background: #c0c0c0; box-shadow: var(--bevel-out); color: #000; }
+html[data-theme="retro"] .chat-orb { border-radius: 0; }
+html[data-theme="retro"] .chat-orb__halo { display: none; }
+html[data-theme="retro"] .sheet tbody tr[aria-selected="true"] td { color: #fff; }
+html[data-theme="retro"] .off__ch > .off__alt { font-family: var(--font-ui); font-weight: 700; font-size: .78em; line-height: 1.6; }
+html[data-theme="retro"] .homegrid__app { color: #fff; text-shadow: 1px 1px 0 #000; }
+html[data-theme="retro"] .homegrid__app .appicon { border-radius: 0; }

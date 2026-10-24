@@ -7,7 +7,7 @@ Portfolio of Celestyn Aurelixia (Lele): a desktop OS you can scroll through.
   Clawd, the pixel desk pet. On phones it turns into an app grid.
 - **Below:** About, Projects (pinned 3D cover stack, newest first), Journey (career timeline + log),
   Achievements, Skills, Off screen (hobbies, drinks and a looping "on repeat" playlist), and Contact.
-- **Three themes:** Glass, Garage (default), and Claude, switched from the timeline in the top bar.
+- **Three themes:** Retro (Windows 98), Garage (default), and Claude, switched from the timeline in the top bar.
 - **Extras:** boot screen, ⌘K / Ctrl+K command palette, and an offline "Ask Lele" chat.
 
 Design references: [rubens.design](https://www.rubens.design/), [bryangarage.dev](https://bryangarage.dev/),

@@ -2,7 +2,7 @@
 // CSS custom properties defined in globals.css (html[data-theme="..."]).
 
 export const THEMES = [
-  { id: "glass", label: "Glass", hint: "Liquid glass · light" },
+  { id: "retro", label: "Retro", hint: "Windows 98 · bevels" },
   { id: "garage", label: "Garage", hint: "Dark garage · terminal" },
   { id: "claude", label: "Claude", hint: "Warm paper · with Clawd" },
 ] as const;

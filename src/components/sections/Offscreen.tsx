@@ -1,5 +1,7 @@
 import { useId } from "react";
 import { offscreen, offscreenText, type OffItem, type OffRow } from "@/content/offscreen";
+import { socials } from "@/content/profile";
+import { ArrowUpRight, SocialIcon } from "@/components/Icons";
 import Reveal, { SectionHeader } from "./Reveal";
 
 /**
@@ -7,6 +9,8 @@ import Reveal, { SectionHeader } from "./Reveal";
  * letters roll into a second face on hover, alternating outline words, a
  * looping marquee row, and a small animated illustration per row.
  */
+const spotify = socials.find((s) => s.id === "spotify");
+
 export default function Offscreen() {
   return (
     <section id="offscreen" className="sec off">
@@ -44,6 +48,11 @@ export default function Offscreen() {
             </div>
           ))}
         </Reveal>
+        {spotify && (
+          <a className="off__spotify btn-ghost" href={spotify.href} target="_blank" rel="noopener noreferrer">
+            <SocialIcon id="spotify" size={16} /> Listen along on Spotify <ArrowUpRight size={14} />
+          </a>
+        )}
       </div>
     </section>
   );
@@ -52,7 +61,7 @@ export default function Offscreen() {
 function Units({ row }: { row: OffRow }) {
   return row.items.map((item, n) => (
     <span key={item.text} className="off__unit">
-      {n > 0 && row.loop && <span className="off__sep" />}
+      {n > 0 && (row.loop ? <span className="off__sep" /> : <span className="off__and">&amp;</span>)}
       <Item item={item} />
     </span>
   ));

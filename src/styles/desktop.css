@@ -5,14 +5,6 @@
 }
 .desktop__bg { position: absolute; inset: 0; z-index: -2; background: var(--hero-bg); }
 .desktop__halo { position: absolute; inset: 0; opacity: 0; transition: opacity .6s; }
-html[data-theme="glass"] .desktop__halo {
-  opacity: 1;
-  background:
-    radial-gradient(30% 22% at 50% 92%, rgba(255,180,120,.35), transparent 70%),
-    radial-gradient(26% 20% at 38% 88%, rgba(120,170,255,.35), transparent 70%),
-    radial-gradient(24% 18% at 62% 90%, rgba(200,140,255,.3), transparent 70%);
-  filter: blur(30px);
-}
 html[data-theme="claude"] .desktop__halo {
   opacity: 1;
   background: radial-gradient(40% 30% at 50% 100%, rgba(217,119,87,.12), transparent 70%);
@@ -105,14 +97,15 @@ html[data-theme="garage"] .dock__item[data-running]::after { background: var(--a
   color: #fff; background: var(--ic, #888);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 4px rgba(0,0,0,.15), 0 4px 10px rgba(0,0,0,.15);
 }
-html[data-theme="glass"] .appicon[data-app="about"] { --ic: linear-gradient(160deg, #ff8a80, #f2453d); }
-html[data-theme="glass"] .appicon[data-app="terminal"] { --ic: linear-gradient(160deg, #4a4a52, #1d1d1f); }
-html[data-theme="glass"] .appicon[data-app="journey"] { --ic: linear-gradient(160deg, #7cb4ff, #2f7bf5); }
-html[data-theme="glass"] .appicon[data-app="awards"] { --ic: linear-gradient(160deg, #ffc65c, #f59b0b); }
-html[data-theme="glass"] .appicon[data-app="gallery"] { --ic: linear-gradient(160deg, #b99aff, #8053f0); }
-html[data-theme="glass"] .appicon[data-app="projects"] { --ic: linear-gradient(160deg, #6fe0f5, #1fb6d8); }
-html[data-theme="glass"] .appicon[data-app="mail"] { --ic: linear-gradient(160deg, #6ee08a, #22b04b); }
-html[data-theme="glass"] .appicon[data-app="chat"] { --ic: linear-gradient(160deg, #ff9ecb, #e64c96); }
+html[data-theme="retro"] .appicon { border-radius: 0; box-shadow: var(--bevel-out); background: #c0c0c0; color: var(--ic); }
+html[data-theme="retro"] .appicon[data-app="about"] { --ic: #c00000; }
+html[data-theme="retro"] .appicon[data-app="terminal"] { --ic: #000000; }
+html[data-theme="retro"] .appicon[data-app="journey"] { --ic: #000080; }
+html[data-theme="retro"] .appicon[data-app="awards"] { --ic: #808000; }
+html[data-theme="retro"] .appicon[data-app="gallery"] { --ic: #800080; }
+html[data-theme="retro"] .appicon[data-app="projects"] { --ic: #008080; }
+html[data-theme="retro"] .appicon[data-app="mail"] { --ic: #008000; }
+html[data-theme="retro"] .appicon[data-app="chat"] { --ic: #ff00ff; }
 html[data-theme="garage"] .appicon {
   --ic: linear-gradient(160deg, #2a2b30, #151517); color: var(--fg-2);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 0 0 1px rgba(255,255,255,.06), 0 6px 14px rgba(0,0,0,.45);
@@ -170,7 +163,7 @@ button.pet { cursor: pointer; }
   font: 12px/1.45 var(--font-mono); color: var(--fg); margin-bottom: 18px;
   animation: popIn .3s var(--ease);
 }
-html[data-theme="glass"] .term-pet__balloon { background: rgba(255,255,255,.9); }
+html[data-theme="retro"] .term-pet__balloon { background: #ffffe1; border-radius: 0; }
 .term-pet__row { display: flex; gap: 6px; margin-top: 8px; }
 
 /* ───────── Mobile home (rubens app grid) ───────── */
