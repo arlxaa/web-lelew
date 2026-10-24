@@ -3,6 +3,7 @@ import { hostOf, projects } from "@/content/projects";
 import { achievements } from "@/content/achievements";
 import { formatMonth, journey } from "@/content/journey";
 import { skills } from "@/content/skills";
+import { offscreen } from "@/content/offscreen";
 import { isThemeId, THEMES, type ThemeId } from "@/lib/themes";
 
 export type Line =
@@ -30,6 +31,7 @@ const HELP: [string, string][] = [
   ["awards", "competitions & medals"],
   ["journey", "experience timeline"],
   ["skills", "the toolbox"],
+  ["music", "what's on repeat"],
   ["contact", "say hi"],
   ["theme <glass|garage|claude>", "switch era"],
   ["pet | nap | wake", "talk to Clawd"],
@@ -39,7 +41,7 @@ const HELP: [string, string][] = [
 
 export const COMMANDS = [
   "help", "whoami", "about", "now", "projects", "awards", "journey", "skills", "contact",
-  "theme", "pet", "nap", "wake", "open", "clear", "date", "gpa", "socials", "sudo", "exit", "ls",
+  "theme", "music", "pet", "nap", "wake", "open", "clear", "date", "gpa", "socials", "sudo", "exit", "ls",
 ];
 
 export function run(raw: string, now: number): { lines: Line[]; effects: TermEffect[] } {
@@ -87,6 +89,15 @@ export function run(raw: string, now: number): { lines: Line[]; effects: TermEff
     case "skills":
       lines.push(out(skills.map((s) => s.name).join(" · ")));
       break;
+    case "music":
+    case "hobbies": {
+      offscreen.forEach((r) => {
+        lines.push(out(r.label.toLowerCase(), "dim"));
+        r.items.forEach((it) => lines.push(out(`  ${r.loop ? "♪ " : "· "}${it.text}${it.sub ? ` — ${it.sub}` : ""}`, r.loop ? "accent" : undefined)));
+      });
+      effects.push({ type: "section", id: "offscreen" });
+      break;
+    }
     case "gpa":
       lines.push(out(`${profile.gpa} / ${profile.gpaMax}  ${"█".repeat(20)}${"░".repeat(1)}`, "ok"));
       break;

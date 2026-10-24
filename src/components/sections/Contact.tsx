@@ -51,7 +51,7 @@ export default function Contact() {
   return (
     <section id="contact" className="sec contact">
       <div className="wrap">
-        <SectionHeader index="06" title="Let's chat" />
+        <SectionHeader index="07" title="Let's chat" />
       </div>
       <div className="band" ref={bandRef} data-done={done || undefined}>
         <p className="band__cmd mono">

@@ -86,7 +86,7 @@ export default function Projects() {
                 </ul>
                 <div className="pmeta__links">
                   <a href={p.demo} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                    Live demo <ArrowUpRight size={14} />
+                    {p.demoLabel ?? "Live demo"} <ArrowUpRight size={14} />
                   </a>
                   {p.repo && (
                     <a href={p.repo} target="_blank" rel="noopener noreferrer" className="btn-ghost">
@@ -132,7 +132,7 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className="stack__card"
                 style={{ ["--i" as string]: i, ["--d" as string]: i }}
-                aria-label={`${proj.title} — open live demo`}
+                aria-label={`${proj.title}: ${(proj.demoLabel ?? "Live demo").toLowerCase()}`}
                 tabIndex={i === active ? 0 : -1}
               >
                 <span className="stack__chrome">
@@ -192,7 +192,7 @@ export default function Projects() {
         </div>
       </div>
       <div className="stack-cursor" ref={cursorRef} aria-hidden>
-        <span>View live ↗</span>
+        <span>{p?.demoLabel ?? "View live"} ↗</span>
       </div>
     </section>
   );

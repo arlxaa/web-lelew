@@ -13,6 +13,7 @@ export const SECTIONS = [
   { id: "journey", label: "Journey" },
   { id: "achievements", label: "Achievements" },
   { id: "skills", label: "Skills" },
+  { id: "offscreen", label: "Off screen" },
   { id: "contact", label: "Contact" },
 ];
 

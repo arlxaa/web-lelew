@@ -151,3 +151,27 @@ No public source maps on any of the three sites.
   (`hz-on` / `hz-off`).
 - **Sibal reveal:** panels get `is-armed → draw rule (≈620 ms) → flash → is-shown → is-settled`
   (1.3 s later), staggered 55–110 ms.
+
+## Pass 3: mineenim.vercel.app "about" rows (2026-10-24)
+
+Source: the shipped Vite bundle (`/assets/index-*.js` + `.css`), read directly. REA was unavailable.
+
+- **Data:** rows of `{ label, items[], loop }`. The visual list is `aria-hidden`, and a visually
+  hidden sentence carries the same content for screen readers.
+- **Layout:** each row is a grid `minmax(9rem,17rem) | 1fr`. The `dt` shows a CSS counter
+  (`01`) plus the label. The illustration sits in the same first cell, placed `center end`, at
+  `clamp(6.5rem, 9.7vw, 8.75rem)` wide. Words use `--f: clamp(2.5rem, 5.8vw, 6.5rem)`.
+- **Letter roll:** every character is two stacked spans, and the second is absolutely positioned at
+  `inset: 100% 0 auto`. On hover GSAP moves them to `yPercent -100` (0.5 s, 14 ms stagger), so
+  each letter swaps to an uppercase UI face. Every second item is drawn as outline text
+  (`-webkit-text-stroke: 1.5px`).
+- **Loop row:** two copies of the set inside a track, tweened `xPercent -50` over 48 s with linear
+  easing on repeat. Separators are accent dots sized `0.12 × --f`.
+- **Entrance:** rows clip in from `inset(0 0 100% 0)` (stagger 0.14 s). Illustrations pop from
+  `scale 0, rotate -25°`. On hover an illustration lifts `y -10, rotate 8°, scale 1.1`.
+- **Ours:**
+  - Done in CSS: transitions with `--c` delays, plus a keyframe marquee that pauses on hover.
+  - The roll face is Departure Mono in the accent colour.
+  - The illustrations are drawn new: a swim ring with z's, an iced matcha latte, and headphones.
+  - The reveal observes the row wrapper, because Chrome's IntersectionObserver never reports a
+    fully clip-pathed element as intersecting.

@@ -2,6 +2,7 @@ import { about, profile, socials } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { achievements } from "@/content/achievements";
 import { organizations } from "@/content/journey";
+import { offscreenText } from "@/content/offscreen";
 
 // "Ask Lele" is offline: keyword intents mapped to pre-written answers.
 // ✏️ Add an intent by giving it keywords and an answer.
@@ -41,7 +42,7 @@ const INTENTS: { keys: string[]; answer: () => ChatAnswer }[] = [
   {
     keys: ["project", "projects", "build", "built", "made", "portfolio", "app"],
     answer: () => ({
-      text: `She has built ${projects.map((p) => p.title).join(", ")}. ${projects[0].title} turns live audio into light shows; ${projects[2].title} is a browser arcade with a 3D coin pusher.`,
+      text: `She has built ${projects.map((p) => p.title).join(", ")}. The newest is ${projects[0].title}, a native Windows app in C#; Club Lights turns live audio into light shows, and Lucky Jackpot88 is a browser arcade with a 3D coin pusher.`,
       actions: [{ label: "See projects", kind: "section", target: "projects" }],
     }),
   },
@@ -89,6 +90,13 @@ const INTENTS: { keys: string[]; answer: () => ChatAnswer }[] = [
         { label: "Write a message", kind: "app", target: "mail" },
         { label: "GitHub", kind: "link", target: socials[0].href },
       ],
+    }),
+  },
+  {
+    keys: ["hobby", "hobbies", "music", "song", "songs", "listen", "playlist", "drink", "matcha", "fun", "free time", "swim"],
+    answer: () => ({
+      text: offscreenText.replace(/^Loves/, "She loves"),
+      actions: [{ label: "Off screen", kind: "section", target: "offscreen" }],
     }),
   },
   {
