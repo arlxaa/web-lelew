@@ -1,69 +1,54 @@
-import type { Metadata } from "next";
-import { Poppins, Space_Grotesk, Space_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { fontVariables } from "./fonts";
 import "./globals.css";
-import { profile } from "@/lib/content";
-import Teardrops from "@/components/Teardrops";
-import NightSky from "@/components/NightSky";
-import Loader from "@/components/Loader";
-import CursorGlow from "@/components/CursorGlow";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-// Mono labels a la Room & Pillar (Fraktion Mono substitute).
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-rpmono",
-  display: "swap",
-});
+import "@/styles/chrome.css";
+import "@/styles/desktop.css";
+import "@/styles/apps.css";
+import "@/styles/sections.css";
+import { profile } from "@/content/profile";
+import { BOOT_STORAGE_KEY, DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/themes";
+import { OSProvider } from "@/components/OSProvider";
+import BootScreen from "@/components/chrome/BootScreen";
+import TopBar from "@/components/chrome/TopBar";
+import CommandPalette from "@/components/chrome/CommandPalette";
 
 export const metadata: Metadata = {
-  title: `${profile.name} — Computer Science Student`,
+  title: `${profile.name} — ${profile.role}`,
   description: profile.tagline,
   openGraph: {
-    title: `${profile.name} — Portfolio`,
+    title: `${profile.name} — LELE.OS`,
     description: profile.tagline,
     type: "website",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: "#141414",
+};
+
+// Runs before paint: restores the saved theme and skips the boot screen
+// for returning visitors (same session) or reduced-motion users.
+const prePaint = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('${THEME_STORAGE_KEY}');d.dataset.theme=(t==='glass'||t==='garage'||t==='claude')?t:'${DEFAULT_THEME}';if(sessionStorage.getItem('${BOOT_STORAGE_KEY}')||matchMedia('(prefers-reduced-motion: reduce)').matches)d.dataset.boot='done';}catch(e){d.dataset.theme='${DEFAULT_THEME}';}d.dataset.js='1';})();`;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${spaceGrotesk.variable} ${spaceMono.variable}`}>
+    <html lang="en" data-theme={DEFAULT_THEME} className={fontVariables} suppressHydrationWarning>
       <head>
-        {/* Apply saved theme before paint to avoid a flash */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.add('light');}var a=localStorage.getItem('accent');if(a){document.documentElement.setAttribute('data-accent',a);}}catch(e){}})();`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: prePaint }} />
+        <noscript>
+          <style>{`.boot{display:none!important}`}</style>
+        </noscript>
       </head>
-      <body className="font-sans antialiased">
-        <Loader />
-        <div className="app-bg" aria-hidden />
-        <NightSky />
-        <div className="app-mesh" aria-hidden />
-        <div className="app-grid" aria-hidden />
-        <div className="app-cursor" aria-hidden />
-        <CursorGlow />
-        <Teardrops />
-        {children}
+      <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <OSProvider>
+          <BootScreen />
+          <TopBar />
+          <main id="main">{children}</main>
+          <CommandPalette />
+        </OSProvider>
       </body>
     </html>
   );
