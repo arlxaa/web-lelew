@@ -1,3 +1,5 @@
+import { projects } from "./projects";
+
 // ✏️ All site copy lives in /src/content. Edit text here and every app,
 // window and section picks it up.
 
@@ -44,7 +46,7 @@ export const socials: { id: SocialId; label: string; handle: string; href: strin
 // ✏️ Stat strip under the intro statement.
 export const stats = [
   { value: "3.97", label: "GPA / 4.00" },
-  { value: "8", label: "Years of Taekwondo" },
+  { value: String(projects.length), label: "Projects shipped" },
   { value: "7+", label: "Awards" },
   { value: "6", label: "Organizations" },
 ];
@@ -80,30 +82,6 @@ export const statement: StatementPart[] = [
   { key: "artificial intelligence" },
   " and ",
   { key: "cybersecurity" },
-  ". ",
-  {
-    key: "National UI design champion",
-    peek: {
-      path: "falcon-project-14/winners",
-      state: "1st Place",
-      title: "Falcon × Qatar Airways UI Design Competition",
-      meta: "FIT · Universitas Pelita Harapan",
-      stat: "Nov 2024",
-    },
-  },
-  ", ",
-  { key: "1st Dan black belt" },
-  " after eight years of Poomsae, and now digging into digital forensics & OSINT with ",
-  {
-    key: "PETIR Cyber Security",
-    peek: {
-      path: "socs.binus/petir",
-      state: "Active",
-      title: "Digital Forensics & OSINT",
-      meta: "S-Class · School of Computer Science",
-      stat: "2026–now",
-    },
-  },
   ".",
 ];
 
